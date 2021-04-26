@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/aniron" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/aniron_bold" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/base_one_bold" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/base_one_heavy" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/base_one_regular" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/coolvetica" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/heycomic" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/heyfun" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/keepcalm" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/oswald_bold" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/oswald_light" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/oswald_regular" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/pirulen" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/ringbearer" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/tabarra_shadow" />
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/tabarra_shadow_italic" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/the_juke_box" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/ubuntu" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/ubuntu_bold" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/ubuntu_bold_italic" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/ubuntu_italic" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/ubuntu_light" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/ubuntu_light_italic" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/ubuntu_medium" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/ubuntu_medium_italic" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_condensed" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_expand" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_expand_bold" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_expand_revob" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_expand_semi" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_expand_ultra" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_oblique" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_oblique_bold" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_oblique_expand" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_oblique_semibold" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_revoblique" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_semibold" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_semibold_revob" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_ultracondensed" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_ultraexpand" />
+    <font
+            android:fontStyle="italic"
+            android:fontWeight="400"
+            android:font="@font/walkway_upper_zebra" />
+
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/mexcellent"/>
+
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/great_lakes_shadow"/>
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/beautysc"/>
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/yorkwhiteletter"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/goffik_outline"/>
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/arialic_hollow"/>
+    <font
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            android:font="@font/ubuntu_round"/>
+
+
+
+</font-family>

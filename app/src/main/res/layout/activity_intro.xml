@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#080808"
+        tools:context=".Intro">
+
+    <ImageView
+            android:id="@+id/Logo"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_above="@id/Title"
+    />
+
+    <TextView
+            android:id="@+id/Title"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:text="TITLE"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/ubuntu"
+            android:gravity="center"
+            android:textSize="50dp"
+    />
+
+    <TextView
+            android:id="@+id/Credits"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="CREATED BY: NEIL RENDELL REGLOS &amp; ROZS RAVEN TIO"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/ubuntu"
+            android:gravity="center"
+    />
+
+</RelativeLayout>
