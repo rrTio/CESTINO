@@ -13,7 +13,7 @@
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/logo"
             android:layout_above="@id/Title"
     />
 
@@ -22,7 +22,7 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_centerInParent="true"
-            android:text="TITLE"
+            android:text="BIN.PH"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/ubuntu"
             android:gravity="center"

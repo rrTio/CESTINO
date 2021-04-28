@@ -5,15 +5,90 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#808080"
         tools:context=".MainActivity">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <ImageButton
+            android:id="@+id/ibtn_battery"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="80dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/battery"
+    />
+    <ImageButton
+            android:id="@+id/ibtn_bulbs"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="165dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bulbs"
+    />
+    <ImageButton
+            android:id="@+id/ibtn_ewaste"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="245dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ewaste"
+    />
+    <ImageButton
+            android:id="@+id/ibtn_glass"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="325dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/glass"
+    />
+    <ImageButton
+            android:id="@+id/ibtn_metal"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="405dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/metal"
+    />
+    <ImageButton
+            android:id="@+id/ibtn_organic"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="485dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/organic"
+    />
+    <ImageButton
+            android:id="@+id/ibtn_paper"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="565dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/paper"
+    />
+    <ImageButton
+            android:id="@+id/ibtn_plastic"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="645dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/plastic"
+    />
+
+    <ImageView
+            android:id="@+id/player"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            android:src="@drawable/battery"
+    />
 
 </RelativeLayout>
