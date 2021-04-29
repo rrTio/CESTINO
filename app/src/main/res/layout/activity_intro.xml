@@ -24,7 +24,7 @@
             android:layout_centerInParent="true"
             android:text="BIN.PH"
             android:textColor="#FFFFFF"
-            android:fontFamily="@font/ubuntu"
+            android:fontFamily="@font/heyfun"
             android:gravity="center"
             android:textSize="50dp"
     />

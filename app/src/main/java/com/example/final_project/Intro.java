@@ -32,7 +32,7 @@ public class Intro extends AppCompatActivity
         TextView credits = findViewById(R.id.Credits); credits.setAnimation(fadeOut);
 
         new Handler().postDelayed(new Runnable()
-        {@Override public void run() { Intent intent = new Intent(Intro.this, MainActivity.class); startActivity(intent); }}, INTRO_TIMEOUT);
+        {@Override public void run() { Intent intent = new Intent(Intro.this, MainMenu.class); startActivity(intent); }}, INTRO_TIMEOUT);
     }
 
     public void navigationBar() {

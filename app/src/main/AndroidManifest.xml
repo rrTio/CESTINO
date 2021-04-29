@@ -9,6 +9,12 @@
             android:roundIcon="@mipmap/logo"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity android:name=".Leaderboards">
+        </activity>
+        <activity android:name=".Instructions">
+        </activity>
+        <activity android:name=".MainMenu">
+        </activity>
         <activity android:name=".Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

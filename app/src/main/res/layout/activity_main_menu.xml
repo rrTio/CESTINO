@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#808080"
+        tools:context=".MainMenu">
+
+    <ImageView
+            android:layout_width="350dp"
+            android:layout_height="300dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/collection"
+    />
+
+    <TextView
+            android:id="@+id/lblTitle"
+            android:layout_width="450dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="BIN.ph"
+            android:textSize="140dp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:fontFamily="@font/goffik_outline"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="125dp"
+    />
+
+    <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/lblTitle"
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="10dp"
+            android:text="PLAY"
+            android:textColor="#000000"
+            android:textSize="50dp"
+            android:gravity="center"
+            android:fontFamily="@font/heyfun"
+    />
+
+    <Button
+            android:id="@+id/btnInstructions"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/btnPlay"
+            android:layout_marginBottom="10dp"
+            android:text="INSTRUCTIONS"
+            android:textColor="#000000"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:fontFamily="@font/heyfun"
+    />
+
+    <Button
+            android:id="@+id/btnLeaderboards"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/btnInstructions"
+            android:layout_marginBottom="10dp"
+            android:text="LEADERBOARDS"
+            android:textColor="#000000"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:fontFamily="@font/heyfun"
+    />
+
+    <Button
+            android:id="@+id/btnQuit"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/btnLeaderboards"
+            android:layout_marginBottom="10dp"
+            android:text="QUIT"
+            android:textColor="#000000"
+            android:textSize="50dp"
+            android:gravity="center"
+            android:fontFamily="@font/heyfun"
+    />
+
+</RelativeLayout>
