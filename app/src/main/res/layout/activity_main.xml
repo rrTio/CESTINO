@@ -10,10 +10,9 @@
 
     <TextView
             android:id="@+id/lblScore"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_margin="15dp"
             android:text="SCORE: "
             android:gravity="center_vertical"
             android:textSize="50dp"
@@ -121,6 +120,14 @@
             android:textSize="30dp"
             android:gravity="center"
             android:fontFamily="@font/heyfun"
+    />
+
+    <ImageView
+            android:id="@+id/trash"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/trash_organic1"
     />
 
     <ImageView
