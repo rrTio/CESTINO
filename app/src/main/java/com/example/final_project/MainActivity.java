@@ -1,9 +1,12 @@
 package com.example.final_project;
 
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,7 +14,9 @@ public class MainActivity extends AppCompatActivity
 {
     ImageButton ibtnBattery, ibtnBulbs, ibtnEWaste, ibtnGlass, ibtnMetal, ibtnOrganic, ibtnPaper, ibtnPlastic;
     ImageView player;
+    Drawable battery, bulbs, eWaste, glass, metal, organic, paper, plastic;
     float xDown = 0,yDown = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -46,8 +51,6 @@ public class MainActivity extends AppCompatActivity
 
                         player.setX(player.getX() + distanceX);
                         player.setY(player.getY() + distanceY);
-                        xDown=movedX;
-                        yDown=movedY;
 
                         break;
                 }
@@ -55,6 +58,16 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
         });
+
+        ibtnBattery.setOnClickListener(new View.OnClickListener()   {@Override public void onClick(View v) {player.setImageDrawable(battery);}});
+        ibtnBulbs.setOnClickListener(new View.OnClickListener()     {@Override public void onClick(View v) {player.setImageDrawable(bulbs);}});
+        ibtnEWaste.setOnClickListener(new View.OnClickListener()    {@Override public void onClick(View v) {player.setImageDrawable(eWaste);}});
+        ibtnGlass.setOnClickListener(new View.OnClickListener()     {@Override public void onClick(View v) {player.setImageDrawable(glass);}});
+        ibtnMetal.setOnClickListener(new View.OnClickListener()     {@Override public void onClick(View v) {player.setImageDrawable(metal);}});
+        ibtnOrganic.setOnClickListener(new View.OnClickListener()   {@Override public void onClick(View v) {player.setImageDrawable(organic);}});
+        ibtnPaper.setOnClickListener(new View.OnClickListener()     {@Override public void onClick(View v) {player.setImageDrawable(paper);}});
+        ibtnPlastic.setOnClickListener(new View.OnClickListener()   {@Override public void onClick(View v) {player.setImageDrawable(plastic);}});
+
     }
 
     public void setup()
@@ -67,6 +80,15 @@ public class MainActivity extends AppCompatActivity
         ibtnOrganic = findViewById(R.id.ibtn_organic);
         ibtnPaper = findViewById(R.id.ibtn_paper);
         ibtnPlastic = findViewById(R.id.ibtn_plastic);
+
+        battery = ibtnBattery.getDrawable();
+        bulbs = ibtnBulbs.getDrawable();
+        eWaste = ibtnEWaste.getDrawable();
+        glass = ibtnGlass.getDrawable();
+        metal = ibtnMetal.getDrawable();
+        organic = ibtnOrganic.getDrawable();
+        paper = ibtnPaper.getDrawable();
+        plastic = ibtnPlastic.getDrawable();
 
         player = findViewById(R.id.player);
     }
