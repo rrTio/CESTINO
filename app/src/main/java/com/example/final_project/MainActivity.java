@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity
 {
     ImageButton ibtnBattery, ibtnBulbs, ibtnEWaste, ibtnGlass, ibtnMetal, ibtnOrganic, ibtnPaper, ibtnPlastic;
     ImageView player;
+    TextView lblScore;
+    int score = 0;
     Drawable battery, bulbs, eWaste, glass, metal, organic, paper, plastic;
     float xDown = 0,yDown = 0;
 
@@ -91,5 +94,8 @@ public class MainActivity extends AppCompatActivity
         plastic = ibtnPlastic.getDrawable();
 
         player = findViewById(R.id.player);
+
+        lblScore = findViewById(R.id.lblScore);
+        lblScore.setText("Score: " + score);
     }
 }
