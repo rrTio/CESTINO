@@ -11,13 +11,35 @@
     <TextView
             android:id="@+id/lblScore"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="15dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:text="SCORE: "
             android:gravity="center_vertical"
             android:textSize="50dp"
             android:textColor="#000000"
             android:fontFamily="@font/heyfun"
+    />
+
+    <ImageView
+            android:id="@+id/lives"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/lblScore"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/life_three"
+    />
+
+    <Button
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_play"
+            android:text="PLAY!"
+            android:textSize="55dp"
+            android:fontFamily="@font/heyfun"
+            android:textStyle="bold"
     />
 
     <ImageButton
@@ -30,6 +52,8 @@
             android:background="@drawable/custom_image_button_background"
             android:layout_marginTop="270dp"
             android:src="@drawable/battery"
+            android:visibility="invisible"
+
     />
     <ImageButton
             android:id="@+id/ibtn_bulbs"
@@ -41,6 +65,8 @@
             android:background="@drawable/custom_image_button_background"
             android:layout_marginTop="365dp"
             android:src="@drawable/bulbs"
+            android:visibility="invisible"
+
     />
     <ImageButton
             android:id="@+id/ibtn_ewaste"
@@ -52,6 +78,8 @@
             android:background="@drawable/custom_image_button_background"
             android:layout_marginTop="460dp"
             android:src="@drawable/ewaste"
+            android:visibility="invisible"
+
     />
     <ImageButton
             android:id="@+id/ibtn_glass"
@@ -63,6 +91,8 @@
             android:background="@drawable/custom_image_button_background"
             android:layout_marginTop="555dp"
             android:src="@drawable/glass"
+            android:visibility="invisible"
+
     />
     <ImageButton
             android:id="@+id/ibtn_metal"
@@ -74,6 +104,8 @@
             android:background="@drawable/custom_image_button_background"
             android:layout_marginTop="270dp"
             android:src="@drawable/metal"
+            android:visibility="invisible"
+
     />
     <ImageButton
             android:id="@+id/ibtn_organic"
@@ -85,6 +117,8 @@
             android:background="@drawable/custom_image_button_background"
             android:layout_marginTop="365dp"
             android:src="@drawable/organic"
+            android:visibility="invisible"
+
     />
     <ImageButton
             android:id="@+id/ibtn_paper"
@@ -96,6 +130,8 @@
             android:background="@drawable/custom_image_button_background"
             android:layout_marginTop="460dp"
             android:src="@drawable/paper"
+            android:visibility="invisible"
+
     />
     <ImageButton
             android:id="@+id/ibtn_plastic"
@@ -107,6 +143,8 @@
             android:background="@drawable/custom_image_button_background"
             android:layout_marginTop="555dp"
             android:src="@drawable/plastic"
+            android:visibility="invisible"
+
     />
 
     <TextView
@@ -120,6 +158,8 @@
             android:textSize="30dp"
             android:gravity="center"
             android:fontFamily="@font/heyfun"
+            android:visibility="invisible"
+
     />
 
     <ImageView
@@ -128,6 +168,7 @@
             android:layout_height="150dp"
             android:layout_centerInParent="true"
             android:src="@drawable/trash_organic1"
+            android:visibility="invisible"
     />
 
     <ImageView
@@ -138,6 +179,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="60dp"
             android:src="@drawable/defaultbin"
+            android:visibility="invisible"
+
     />
 
 </RelativeLayout>
