@@ -126,7 +126,7 @@
             android:id="@+id/trash"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:src="@drawable/trash_organic1"
     />
 

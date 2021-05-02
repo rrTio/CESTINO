@@ -1,12 +1,12 @@
 package com.example.final_project;
 
+import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,11 +17,14 @@ public class MainActivity extends AppCompatActivity
     ImageButton ibtnBattery, ibtnBulbs, ibtnEWaste, ibtnGlass, ibtnMetal, ibtnOrganic, ibtnPaper, ibtnPlastic;
     ImageView player, trash;
     TextView lblScore, trashName;
+    Rect playerImage = new Rect(), enemyImage = new Rect();
 
+    boolean collision = false;
     int score = 0;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY;
     String strbatteries, strbulbs, strEWaste, strGlass, strMetals, strOrganic, strPapers, strPlastics;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -46,23 +49,31 @@ public class MainActivity extends AppCompatActivity
                         player.setX(player.getX() + distanceX); player.setY(player.getY() + distanceY);
 
                         break;
+
+                    case MotionEvent.ACTION_UP:
+                        checkCollision();
+
+                        if(collision == true)
+                        {
+                            score++;
+                            lblScore.setText("Score: " + String.valueOf(score));
+                            Toast.makeText(MainActivity.this, "COLLIDED", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
                 }
                 return true;
             }
         });
 
         //CHANGE PLAYER'S IMAGE & SET THE BIN'S NAME
-        ibtnBattery.setOnClickListener(new View.OnClickListener()
-        {@Override public void onClick(View v) {player.setImageDrawable(battery); trashName.setText(strbatteries);}});
+        ibtnBattery.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {player.setImageDrawable(battery); trashName.setText(strbatteries);}});
 
-        ibtnBulbs.setOnClickListener(new View.OnClickListener()
-        {@Override public void onClick(View v) {player.setImageDrawable(bulbs);   trashName.setText(strbulbs);}});
+        ibtnBulbs.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {player.setImageDrawable(bulbs);   trashName.setText(strbulbs);}});
 
-        ibtnEWaste.setOnClickListener(new View.OnClickListener()
-        {@Override public void onClick(View v) {player.setImageDrawable(eWaste);  trashName.setText(strEWaste);}});
+        ibtnEWaste.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {player.setImageDrawable(eWaste);  trashName.setText(strEWaste);}});
 
-        ibtnGlass.setOnClickListener(new View.OnClickListener()
-        {@Override public void onClick(View v) {player.setImageDrawable(glass);   trashName.setText(strGlass);}});
+        ibtnGlass.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {player.setImageDrawable(glass);   trashName.setText(strGlass);}});
 
         ibtnMetal.setOnClickListener(new View.OnClickListener()
         {@Override public void onClick(View v) {player.setImageDrawable(metal);   trashName.setText(strMetals);}});
@@ -75,6 +86,18 @@ public class MainActivity extends AppCompatActivity
 
         ibtnPlastic.setOnClickListener(new View.OnClickListener()
         {@Override public void onClick(View v) {player.setImageDrawable(plastic); trashName.setText(strPlastics);}});
+    }
+
+    public void checkCollision()
+    {
+        playerImage = new Rect();
+        enemyImage = new Rect();
+
+        player.getHitRect(playerImage);
+        trash.getHitRect(enemyImage);
+
+        if(playerImage.intersect(enemyImage)) {collision = true;}
+        else {collision = false;}
     }
 
     //SETUP COMPONENTS
