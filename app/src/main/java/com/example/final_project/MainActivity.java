@@ -15,6 +15,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
 {
+    Button btnStart;
     Rect playerImage, trashImage;
     TextView lblScore, trashName;
     ImageView player, trash, lives;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity
     int  boundsValue = 4, trashBounds = 4;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY;
     String strbatteries, strbulbs, strEWaste, strGlass, strMetals, strOrganic, strPapers, strPlastics;
-    String bio, nonBio, recycle;
+    String bio, nonBio, recycle, trashOut;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("ClickableViewAccessibility")
@@ -37,8 +38,17 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         setup(); //SETTING UP OF COMPONENTS
 
+        btnStart.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                trashOut = trashType();
+            }
+        });
+
         //PLAYER'S MOTION
-        player.setOnTouchListener(new View.OnTouchListener()
+        trash.setOnTouchListener(new View.OnTouchListener()
         {
             @Override public boolean onTouch(View v, MotionEvent event)
             {
@@ -60,8 +70,12 @@ public class MainActivity extends AppCompatActivity
                         checkCollision();
                         if(collision == true)
                         {
-                            score++; lblScore.setText("Score: " + String.valueOf(score));
-                            Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
+                            /*if(trashOut == trashBin)
+                            {
+                                score++; lblScore.setText("Score: " + String.valueOf(score));
+                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
+                            }
+                            else {wrongAnswer();}*/
                         }
 
                         //NOT FINAL FOR WRONG EVENTS
@@ -105,6 +119,7 @@ public class MainActivity extends AppCompatActivity
     {
         String[] trashType = {"BIODEGRADABLE", "NON-BIODEGRADABLE", "RECYCLABLE"};
         final int trashValue = new Random().nextInt(2);
+
         return trashType[trashValue];
     }
 
@@ -144,6 +159,8 @@ public class MainActivity extends AppCompatActivity
     public void setup()
     {
         //INSTANTIATION
+        btnStart = findViewById(R.id.StartGame);
+
         ibtnBulbs = findViewById(R.id.ibtn_bulbs);
         ibtnGlass = findViewById(R.id.ibtn_glass);
         ibtnMetal = findViewById(R.id.ibtn_metal);
