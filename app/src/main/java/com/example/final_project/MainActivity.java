@@ -70,12 +70,8 @@ public class MainActivity extends AppCompatActivity
                         checkCollision();
                         if(collision == true)
                         {
-                            /*if(trashOut == trashBin)
-                            {
-                                score++; lblScore.setText("Score: " + String.valueOf(score));
-                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
-                            }
-                            else {wrongAnswer();}*/
+                            score++; lblScore.setText("Score: " + score);
+                            Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
                         }
 
                         //NOT FINAL FOR WRONG EVENTS
@@ -111,38 +107,38 @@ public class MainActivity extends AppCompatActivity
         else {collision = false;}
     }
 
-    //RANDOMIZER FOR TRASH AND VALUES
-    public int random() {final int randomValue = new Random().nextInt(boundsValue); return randomValue;}
-
     //ARRAYS FOR IMAGES AND VALUES
-    public static String trashType()
+    public String trashType()
     {
-        String[] trashType = {"BIODEGRADABLE", "NON-BIODEGRADABLE", "RECYCLABLE"};
         final int trashValue = new Random().nextInt(2);
+        int randomize = new Random().nextInt(trashBounds);
+        String[] trashType = {"BIODEGRADABLE", "NON-BIODEGRADABLE", "RECYCLABLE"};
+        String output = trashType[trashValue];
 
-        return trashType[trashValue];
+        if(output == "BIODEGRADABLE") {bioDegradable(randomize);}
+        if(output == "NON-BIODEGRADABLE") {nonBioDegradable(randomize);}
+        if(output == "RECYCLABLE") {recyclable(randomize);}
+
+        return output;
     }
 
     //ARRAYS FOR RANDOM IMAGES
-    public void bioDegradable()
+    public void bioDegradable(int randomize)
     {
-        trash = findViewById(R.id.trash);
-        int[] bioDegradable = {};
-        Drawable draw = getResources().getDrawable(bioDegradable[random]); trash.setImageDrawable(draw);
+        trash = findViewById(R.id.trash); int[] bioDegradable = {};
+        Drawable draw = getResources().getDrawable(bioDegradable[randomize]); trash.setImageDrawable(draw);
     }
 
-    public void nonBioDegradable()
+    public void nonBioDegradable(int randomize)
     {
-        trash = findViewById(R.id.trash);
-        int[] nonBioDegradable = {};
-        Drawable draw = getResources().getDrawable(nonBioDegradable[random]); trash.setImageDrawable(draw);
+        trash = findViewById(R.id.trash); int[] nonBioDegradable = {};
+        Drawable draw = getResources().getDrawable(nonBioDegradable[randomize]); trash.setImageDrawable(draw);
     }
 
-    public void recyclable()
+    public void recyclable(int randomize)
     {
-        trash = findViewById(R.id.trash);
-        int[] recyclable = {};
-        Drawable draw = getResources().getDrawable(recyclable[random]); trash.setImageDrawable(draw);
+        trash = findViewById(R.id.trash); int[] recyclable = {};
+        Drawable draw = getResources().getDrawable(recyclable[randomize]); trash.setImageDrawable(draw);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
