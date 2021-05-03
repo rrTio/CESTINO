@@ -67,10 +67,7 @@ public class MainActivity extends AppCompatActivity
                         //NOT FINAL FOR WRONG EVENTS
                         if(collision == false)
                         {
-                            livesCount--;
-                            if(livesCount == 2) {lives.setImageDrawable(getDrawable(livesTwo));}
-                            if(livesCount == 1) {lives.setImageDrawable(getDrawable(livesOne));}
-                            if(livesCount == 0) {lives.setImageDrawable(getDrawable(livesNull));}
+
                         }
                         break;
                 }
@@ -131,6 +128,15 @@ public class MainActivity extends AppCompatActivity
         trash = findViewById(R.id.trash);
         int[] recyclable = {};
         Drawable draw = getResources().getDrawable(recyclable[random]); trash.setImageDrawable(draw);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void wrongAnswer()
+    {
+        livesCount--;
+        if(livesCount == 2) {lives.setImageDrawable(getDrawable(livesTwo));}
+        if(livesCount == 1) {lives.setImageDrawable(getDrawable(livesOne));}
+        if(livesCount == 0) {lives.setImageDrawable(getDrawable(livesNull));}
     }
 
     //SETUP COMPONENTS
