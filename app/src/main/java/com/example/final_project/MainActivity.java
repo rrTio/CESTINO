@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity
                 trashName.setVisibility(View.VISIBLE);
                 recyclableName.setVisibility(View.VISIBLE);
                 btnStart.setVisibility(View.INVISIBLE);
+                Log.e("values", "X: " + trash.getX() + "Y: " + trash.getY());
+
             }
         });
 
@@ -93,11 +96,15 @@ public class MainActivity extends AppCompatActivity
                             {
                                 score++; lblScore.setText("Score: " + score);
                                 Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
+                                trash.setImageDrawable(null);
+                                trashType();
                             }
                             else
                             {
                                 wrongAnswer();
                                 Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();
+                                trash.setImageDrawable(null);
+                                trashType();
                             }
                         }
                         break;
@@ -148,11 +155,13 @@ public class MainActivity extends AppCompatActivity
     {
         int cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb; //DECLARE VARIABLES
 
+
+
         cheese = R.drawable.cheese; //INSTANTIATE IMAGE TO VARIABLE
         eggshell = R.drawable.eggshell;
-        
+
         trash = findViewById(R.id.trash); int[] bioDegradable = {cheese, eggshell}; //ADD TO ARRAY
-        Drawable draw = getResources().getDrawable(bioDegradable[randomize]); trash.setImageDrawable(draw);
+        Drawable draw = getResources().getDrawable(bioDegradable[randomize]); trash.setImageDrawable(draw); trash.setX(315.0F); trash.setY(0.0F);
     }
 
     public void recyclable(int randomize)
@@ -196,6 +205,5 @@ public class MainActivity extends AppCompatActivity
         recyclableName = findViewById(R.id.recyclableName);
         lblScore = findViewById(R.id.lblScore);
         lblScore.setText("Score: " + score);
-
     }
 }
