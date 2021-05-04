@@ -16,17 +16,14 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity
 {
     Button btnStart;
-    Rect playerImage, trashImage;
-    TextView lblScore, trashName;
-    ImageView player, trash, lives;
-    Drawable battery, bulbs, eWaste, glass, metal, organic, paper, plastic;
-    ImageButton ibtnBattery, ibtnBulbs, ibtnEWaste, ibtnGlass, ibtnMetal, ibtnOrganic, ibtnPaper, ibtnPlastic;
+    Rect playerImage, trashImage, recyclableImage;
+    TextView lblScore, trashName, recyclableName;
+    ImageView player, trashBin, recyclableBin, lives, trash;
 
-    boolean collision = false;
-    int score = 0, livesCount = 3, random, randomType, livesNull, livesOne, livesTwo, livesThree;
-    int  boundsValue = 4, trashBounds = 4;
+    boolean collisionTrash = false, collisionRecyclable = false;
+    int score = 0, livesCount = 3, livesNull, livesOne, livesTwo, livesThree;
+    int trashBounds = 7;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY;
-    String strbatteries, strbulbs, strEWaste, strGlass, strMetals, strOrganic, strPapers, strPlastics;
     String bio, nonBio, recycle, trashOut;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -44,11 +41,17 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 trashOut = trashType();
+                trashBin.setVisibility(View.VISIBLE);
+                recyclableBin.setVisibility(View.VISIBLE);
+                player.setVisibility(View.VISIBLE);
+                trashName.setVisibility(View.VISIBLE);
+                recyclableName.setVisibility(View.VISIBLE);
+                btnStart.setVisibility(View.INVISIBLE);
             }
         });
 
         //PLAYER'S MOTION
-        trash.setOnTouchListener(new View.OnTouchListener()
+        player.setOnTouchListener(new View.OnTouchListener()
         {
             @Override public boolean onTouch(View v, MotionEvent event)
             {
@@ -67,77 +70,99 @@ public class MainActivity extends AppCompatActivity
 
                     //USER'S TOUCH RELEASED
                     case MotionEvent.ACTION_UP:
-                        checkCollision();
-                        if(collision == true)
+                        checkCollisionTrash();
+                        if(collisionTrash == true)
                         {
-                            score++; lblScore.setText("Score: " + score);
-                            Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
+                            if (trashOut == "TRASH")
+                            {
+                                score++; lblScore.setText("Score: " + score);
+                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                wrongAnswer();
+                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
+                        checkCollisionRecyclable();
                         //NOT FINAL FOR WRONG EVENTS
-                        if(collision == false)
+                        if(collisionRecyclable == true)
                         {
-
+                            if (trashOut == "RECYCLABLE")
+                            {
+                                score++; lblScore.setText("Score: " + score);
+                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                wrongAnswer();
+                                Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();
+                            }
                         }
                         break;
                 }
                 return true;
             }
         });
+        }
 
-        //CHANGE PLAYER'S IMAGE & SET THE BIN'S NAME
-        ibtnBattery.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {player.setImageDrawable(battery); trashName.setText(strbatteries);}});
-        ibtnBulbs.setOnClickListener(new View.OnClickListener()   {@Override public void onClick(View v) {player.setImageDrawable(bulbs);   trashName.setText(strbulbs);}});
-        ibtnEWaste.setOnClickListener(new View.OnClickListener()  {@Override public void onClick(View v) {player.setImageDrawable(eWaste);  trashName.setText(strEWaste);}});
-        ibtnGlass.setOnClickListener(new View.OnClickListener()   {@Override public void onClick(View v) {player.setImageDrawable(glass);   trashName.setText(strGlass);}});
-        ibtnMetal.setOnClickListener(new View.OnClickListener()   {@Override public void onClick(View v) {player.setImageDrawable(metal);   trashName.setText(strMetals);}});
-        ibtnOrganic.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {player.setImageDrawable(organic); trashName.setText(strOrganic);}});
-        ibtnPaper.setOnClickListener(new View.OnClickListener()   {@Override public void onClick(View v) {player.setImageDrawable(paper);   trashName.setText(strPapers);}});
-        ibtnPlastic.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {player.setImageDrawable(plastic); trashName.setText(strPlastics);}});
-    }
-
-    public void checkCollision()
+    public void checkCollisionTrash()
     {
         //SETUP RECT FOR IMAGEVIEWS
         playerImage = new Rect(); trashImage = new Rect();
-        player.getHitRect(playerImage); trash.getHitRect(trashImage);
+        player.getHitRect(playerImage); trashBin.getHitRect(trashImage);
 
         //COLLISION CHECKER FOR IMAGEVIEWS
-        if(playerImage.intersect(trashImage)) {collision = true;}
-        else {collision = false;}
+        if(playerImage.intersect(trashImage)) { collisionTrash = true;}
+        else { collisionTrash = false;}
+    }
+
+    public void checkCollisionRecyclable()
+    {
+        //SETUP RECT FOR IMAGEVIEWS
+        playerImage = new Rect(); recyclableImage = new Rect();
+        player.getHitRect(playerImage); recyclableBin.getHitRect(recyclableImage);
+
+        //COLLISION CHECKER FOR IMAGEVIEWS
+        if(playerImage.intersect(recyclableImage)) {collisionRecyclable = true;}
+        else {collisionRecyclable = false;}
     }
 
     //ARRAYS FOR IMAGES AND VALUES
     public String trashType()
     {
-        final int trashValue = new Random().nextInt(2);
+        final int trashValue = new Random().nextInt(1);
         int randomize = new Random().nextInt(trashBounds);
-        String[] trashType = {"BIODEGRADABLE", "NON-BIODEGRADABLE", "RECYCLABLE"};
+        String[] trashType = {"TRASH", "RECYCLABLE"};
         String output = trashType[trashValue];
 
-        if(output == "BIODEGRADABLE") {bioDegradable(randomize);}
-        if(output == "NON-BIODEGRADABLE") {nonBioDegradable(randomize);}
+        if(output == "TRASH") {trash(randomize);}
         if(output == "RECYCLABLE") {recyclable(randomize);}
 
         return output;
     }
 
     //ARRAYS FOR RANDOM IMAGES
-    public void bioDegradable(int randomize)
+    public void trash(int randomize)
     {
-        trash = findViewById(R.id.trash); int[] bioDegradable = {};
-        Drawable draw = getResources().getDrawable(bioDegradable[randomize]); trash.setImageDrawable(draw);
-    }
+        int cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb; //DECLARE VARIABLES
 
-    public void nonBioDegradable(int randomize)
-    {
-        trash = findViewById(R.id.trash); int[] nonBioDegradable = {};
-        Drawable draw = getResources().getDrawable(nonBioDegradable[randomize]); trash.setImageDrawable(draw);
+        cheese = R.drawable.cheese; //INSTANTIATE IMAGE TO VARIABLE
+        eggshell = R.drawable.eggshell;
+        
+        trash = findViewById(R.id.trash); int[] bioDegradable = {cheese, eggshell}; //ADD TO ARRAY
+        Drawable draw = getResources().getDrawable(bioDegradable[randomize]); trash.setImageDrawable(draw);
     }
 
     public void recyclable(int randomize)
     {
-        trash = findViewById(R.id.trash); int[] recyclable = {};
+        int brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle; //DECLARE VARIABLES
+        brownPaper = R.drawable.brownpaper; //INSTANTIATE IMAGE TO VARIABLE
+        milk = R.drawable.milk;
+        newspaper = R.drawable.newspaper;
+
+        trash = findViewById(R.id.trash); int[] recyclable = {brownPaper, milk, newspaper}; //ADD TO ARRAY
         Drawable draw = getResources().getDrawable(recyclable[randomize]); trash.setImageDrawable(draw);
     }
 
@@ -157,27 +182,10 @@ public class MainActivity extends AppCompatActivity
         //INSTANTIATION
         btnStart = findViewById(R.id.StartGame);
 
-        ibtnBulbs = findViewById(R.id.ibtn_bulbs);
-        ibtnGlass = findViewById(R.id.ibtn_glass);
-        ibtnMetal = findViewById(R.id.ibtn_metal);
-        ibtnPaper = findViewById(R.id.ibtn_paper);
-        ibtnEWaste = findViewById(R.id.ibtn_ewaste);
-        ibtnBattery = findViewById(R.id.ibtn_battery);
-        ibtnOrganic = findViewById(R.id.ibtn_organic);
-        ibtnPlastic = findViewById(R.id.ibtn_plastic);
-
-        bulbs = ibtnBulbs.getDrawable();
-        glass = ibtnGlass.getDrawable();
-        metal = ibtnMetal.getDrawable();
-        paper = ibtnPaper.getDrawable();
-        eWaste = ibtnEWaste.getDrawable();
-        battery = ibtnBattery.getDrawable();
-        organic = ibtnOrganic.getDrawable();
-        plastic = ibtnPlastic.getDrawable();
-
         lives = findViewById(R.id.lives);
-        trash = findViewById(R.id.trash);
-        player = findViewById(R.id.player);
+        trashBin = findViewById(R.id.binTrash);
+        recyclableBin = findViewById(R.id.binRecyclable);
+        player = findViewById(R.id.trash);
 
         livesNull = R.drawable.life_null;
         livesOne = R.drawable.life_one;
@@ -185,16 +193,9 @@ public class MainActivity extends AppCompatActivity
         livesThree = R.drawable.life_three;
 
         trashName = findViewById(R.id.trashName);
+        recyclableName = findViewById(R.id.recyclableName);
         lblScore = findViewById(R.id.lblScore);
         lblScore.setText("Score: " + score);
 
-        strbulbs = "BULBS";
-        strPapers = "PAPERS";
-        strGlass = "GLASSES";
-        strMetals = "METALS";
-        strEWaste = "E-WASTES";
-        strOrganic = "ORGANICS";
-        strPlastics = "PLASTICS";
-        strbatteries = "BATTERIES";
     }
 }
