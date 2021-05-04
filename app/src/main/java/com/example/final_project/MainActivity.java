@@ -254,15 +254,19 @@ public class MainActivity extends AppCompatActivity
         lblScore = findViewById(R.id.lblScore);
         lblScore.setText("Score: " + score);
     }
+    
     public void returnHome() {Intent intent = new Intent(MainActivity.this, MainMenu.class); startActivity(intent);}
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void noLivesLeft() {lives.setImageDrawable(getDrawable(livesNull));
+    public void noLivesLeft()
+    {
+        lives.setImageDrawable(getDrawable(livesNull));
         trash.setVisibility(View.INVISIBLE);
         trashBin.setVisibility(View.INVISIBLE);
         recyclableBin.setVisibility(View.INVISIBLE);
         trashName.setVisibility(View.INVISIBLE);
         recyclableName.setVisibility(View.INVISIBLE);
         lives.setVisibility(View.INVISIBLE);
-        loseDialog();}
+        loseDialog();
+    }
 }
