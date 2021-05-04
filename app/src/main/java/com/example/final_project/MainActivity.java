@@ -159,8 +159,15 @@ public class MainActivity extends AppCompatActivity
 
         cheese = R.drawable.cheese; //INSTANTIATE IMAGE TO VARIABLE
         eggshell = R.drawable.eggshell;
+        fishBone = R.drawable.fishbone;
+        banana = R.drawable.banana;
+        apple = R.drawable.apple;
+        mask = R.drawable.mask;
+        battery = R.drawable.battery;
+        lightBulb = R.drawable.lightbulb;
 
-        trash = findViewById(R.id.trash); int[] bioDegradable = {cheese, eggshell}; //ADD TO ARRAY
+
+        trash = findViewById(R.id.trash); int[] bioDegradable = {cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb}; //ADD TO ARRAY
         Drawable draw = getResources().getDrawable(bioDegradable[randomize]); trash.setImageDrawable(draw); trash.setX(315.0F); trash.setY(0.0F);
     }
 
@@ -170,8 +177,13 @@ public class MainActivity extends AppCompatActivity
         brownPaper = R.drawable.brownpaper; //INSTANTIATE IMAGE TO VARIABLE
         milk = R.drawable.milk;
         newspaper = R.drawable.newspaper;
+        can = R.drawable.can;
+        styrofoam = R.drawable.styrofoam;
+        trashPaper = R.drawable.trashpaper;
+        plastic = R.drawable.plastic;
+        mineralBottle = R.drawable.mineralbottle;
 
-        trash = findViewById(R.id.trash); int[] recyclable = {brownPaper, milk, newspaper}; //ADD TO ARRAY
+        trash = findViewById(R.id.trash); int[] recyclable = {brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle}; //ADD TO ARRAY
         Drawable draw = getResources().getDrawable(recyclable[randomize]); trash.setImageDrawable(draw);
     }
 
