@@ -35,25 +35,24 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setup(); //SETTING UP OF COMPONENTS
-        btnStart.setOnClickListener(new View.OnClickListener()
-        {@Override public void onClick(View v) {startGame();}});
-        //PLAYER'S MOTION
+        setup();
+
+        btnStart.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {startGame();}});
+
         player.setOnTouchListener(new View.OnTouchListener()
         {
             @Override public boolean onTouch(View v, MotionEvent event)
             {
                 switch (event.getActionMasked())
                 {
-                    //USER'S TOUCH
                     case MotionEvent.ACTION_DOWN: xDown = event.getX(); yDown = event.getY(); break;
-                    //USER'S MOTION
+
                     case MotionEvent.ACTION_MOVE:
                         movedX = event.getX(); movedY = event.getY();
                         distanceX = movedX - xDown; distanceY = movedY - yDown;
                         player.setX(player.getX() + distanceX); player.setY(player.getY() + distanceY);
                         break;
-                    //USER'S TOUCH RELEASED
+
                     case MotionEvent.ACTION_UP:
                         //FOR TRASH
                         checkCollisionTrash();
@@ -78,19 +77,21 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+
     public void checkCollisionTrash()
     {
         playerImage = new Rect(); trashImage = new Rect();
         player.getHitRect(playerImage); trashBin.getHitRect(trashImage);
         if(playerImage.intersect(trashImage)) {collisionTrash = true;} else {collisionTrash = false;}
     }
+
     public void checkCollisionRecyclable()
     {
         playerImage = new Rect(); recyclableImage = new Rect();
         player.getHitRect(playerImage); recyclableBin.getHitRect(recyclableImage);
         if(playerImage.intersect(recyclableImage)) {collisionRecyclable = true;} else {collisionRecyclable = false;}
     }
-    //ARRAYS FOR IMAGES AND VALUES
+
     public void trashType()
     {
         String[] trashType = {"TRASH", "RECYCLABLE"};
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity
         trashOut = output;
         Log.e("values", "TRASH TYPE: " + trashOut);
     }
-    //ARRAYS FOR RANDOM IMAGES
+
     public void trash()
     {
         int cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb;
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity
         Log.e("values", "TRASH ARRAY TO STRING: " + strArray);
         Log.e("values", "TRASH ELEMENT: " + strElement);
     }
+
     public void recyclable()
     {
         int brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle;
@@ -167,26 +169,30 @@ public class MainActivity extends AppCompatActivity
         if(livesCount == 1) {lives.setImageDrawable(getDrawable(livesOne));}
         if(livesCount == 0) {noLivesLeft();}
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void loseDialog()
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.custom_alert_dialog_lose);
         Log.e("status", "LOSE");
+
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener()
         {@Override public void onClick(DialogInterface dialog, int which) {startGame(); dialog.dismiss();}});
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener()
         {@Override public void onClick(DialogInterface dialog, int which) {returnHome(); dialog.dismiss();}});
+
         AlertDialog dialog = builder.create(); dialog.show();
         Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE); Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         LinearLayout.LayoutParams layoutParamsPositive = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
         LinearLayout.LayoutParams layoutParamsNegative = (LinearLayout.LayoutParams) btnNegative.getLayoutParams();
         btnPositive.setBackground(getDrawable(R.drawable.alert_dialog_yes)); btnNegative.setBackground(getDrawable(R.drawable.alert_dialog_no));
         btnNegative.setTextColor(Color.parseColor("#000000")); btnPositive.setTextColor(Color.parseColor("#000000"));
-        btnPositive.setTextSize(35); btnNegative.setTextSize(351);
+        btnPositive.setTextSize(35); btnNegative.setTextSize(35);
         layoutParamsPositive.weight = 10; layoutParamsNegative.weight = 10;
         btnPositive.setLayoutParams(layoutParamsPositive); btnNegative.setLayoutParams(layoutParamsNegative);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startGame()
     {
@@ -205,11 +211,9 @@ public class MainActivity extends AppCompatActivity
         Log.e("values", "COORDINATES:\nX: " + trash.getX() + "\nY: " + trash.getY());
     }
 
-    //SETUP COMPONENTS
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void setup()
     {
-        //INSTANTIATION
         lives = findViewById(R.id.lives);
         player = findViewById(R.id.trash);
         trashBin = findViewById(R.id.binTrash);
@@ -222,7 +226,9 @@ public class MainActivity extends AppCompatActivity
         livesTwo = R.drawable.life_two; livesThree = R.drawable.life_three;
         lblScore.setText("Score: " + score);
     }
+
     public void returnHome() {Intent intent = new Intent(MainActivity.this, MainMenu.class); startActivity(intent);}
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void noLivesLeft()
     {
