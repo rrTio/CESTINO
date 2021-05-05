@@ -4,15 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
+import android.view.*;
 import android.widget.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -20,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -33,6 +34,10 @@ public class MainActivity extends AppCompatActivity
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, xCoordinate = 460.0F, yCoordinate = 250.0F;
     String trashOut;
 
+    private int screenWidth, screenHeight;
+    private Handler handler = new Handler();
+    private Timer timer = new Timer();
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -41,6 +46,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setup(); //SETTING UP OF COMPONENTS
+
+        WindowManager windowManager = getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenWidth = size.x;
+        screenHeight = size.y;
 
         btnStart.setOnClickListener(new View.OnClickListener()
         {@Override public void onClick(View v) {startGame();}});
@@ -108,6 +120,35 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
         });
+    }
+
+    public void changePosition()
+    {
+        yCoordinate += 10;
+        if(player.getY() + player.getHeight() < 0)
+        {
+            xCoordinate = (float)Math.floor(Math.random() * (screenWidth - player.getWidth()));
+            yCoordinate = screenHeight - 100.0F;
+        }
+        player.setX(xCoordinate);
+        player.setY(yCoordinate);
+    }
+
+    public void movePlayer()
+    {
+        timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        changePosition();
+                    }
+                });
+            }
+        }, 0, 20);
     }
 
     public void checkCollisionTrash()
@@ -229,6 +270,7 @@ public class MainActivity extends AppCompatActivity
         trashName.setVisibility(View.VISIBLE);
         recyclableName.setVisibility(View.VISIBLE);
         btnStart.setVisibility(View.INVISIBLE);
+        movePlayer();
         Log.e("values", "X: " + trash.getX() + "Y: " + trash.getY());
     }
 
@@ -253,8 +295,9 @@ public class MainActivity extends AppCompatActivity
         recyclableName = findViewById(R.id.recyclableName);
         lblScore = findViewById(R.id.lblScore);
         lblScore.setText("Score: " + score);
+
     }
-    
+
     public void returnHome() {Intent intent = new Intent(MainActivity.this, MainMenu.class); startActivity(intent);}
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
