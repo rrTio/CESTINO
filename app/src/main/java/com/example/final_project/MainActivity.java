@@ -44,51 +44,34 @@ public class MainActivity extends AppCompatActivity
                 {
                     //USER'S TOUCH
                     case MotionEvent.ACTION_DOWN: xDown = event.getX(); yDown = event.getY(); break;
+
                     //USER'S MOTION
                     case MotionEvent.ACTION_MOVE:
                         movedX = event.getX(); movedY = event.getY();
                         distanceX = movedX - xDown; distanceY = movedY - yDown;
                         player.setX(player.getX() + distanceX); player.setY(player.getY() + distanceY);
                         break;
+
                     //USER'S TOUCH RELEASED
                     case MotionEvent.ACTION_UP:
                         //FOR TRASH
                         checkCollisionTrash();
                         if(collisionTrash == true)
                         {
+                            trash.setImageDrawable(null); trashType();
                             if (trashOut == "TRASH")
-                            {
-                                score++; lblScore.setText("Score: " + score);
-                                trash.setImageDrawable(null);
-                                trashType();
-                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                wrongAnswer();
-                                trash.setImageDrawable(null);
-                                trashType();
-                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
-                            }
+                            {score++; lblScore.setText("Score: " + score); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
+                            else{wrongAnswer(); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
                         }
+
                         //FOR RECYCLABLE
                         checkCollisionRecyclable();
                         if(collisionRecyclable == true)
                         {
+                            trash.setImageDrawable(null); trashType();
                             if (trashOut == "RECYCLABLE")
-                            {
-                                score++; lblScore.setText("Score: " + score);
-                                trash.setImageDrawable(null);
-                                trashType();
-                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                wrongAnswer();
-                                trash.setImageDrawable(null);
-                                trashType();
-                                Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();
-                            }
+                            {score++; lblScore.setText("Score: " + score); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
+                            else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
                         }
                         break;
                 }
@@ -96,6 +79,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+
     public void checkCollisionTrash()
     {
         //SETUP RECT FOR IMAGEVIEWS
@@ -104,6 +88,7 @@ public class MainActivity extends AppCompatActivity
         //COLLISION CHECKER FOR IMAGEVIEWS
         if(playerImage.intersect(trashImage)) {collisionTrash = true;} else {collisionTrash = false;}
     }
+
     public void checkCollisionRecyclable()
     {
         //SETUP RECT FOR IMAGEVIEWS
@@ -112,18 +97,17 @@ public class MainActivity extends AppCompatActivity
         //COLLISION CHECKER FOR IMAGEVIEWS
         if(playerImage.intersect(recyclableImage)) {collisionRecyclable = true;} else {collisionRecyclable = false;}
     }
+
     //ARRAYS FOR IMAGES AND VALUES
     public String trashType()
     {
         final int trashValue = new Random().nextInt(2);
         int randomize = new Random().nextInt(trashBounds);
-        String[] trashType = {"TRASH", "RECYCLABLE"};
-        String output = trashType[trashValue];
-        if(output == "TRASH") {trash(randomize);}
-        if(output == "RECYCLABLE") {recyclable(randomize);}
-        Log.e("values", output);
-        return output;
+        String[] trashType = {"TRASH", "RECYCLABLE"}; String output = trashType[trashValue];
+        if(output == "TRASH") {trash(randomize);} if(output == "RECYCLABLE") {recyclable(randomize);}
+        Log.e("values", output); return output;
     }
+
     //ARRAYS FOR RANDOM IMAGES
     public void trash(int randomize)
     {
@@ -137,10 +121,11 @@ public class MainActivity extends AppCompatActivity
         fishBone = R.drawable.fishbone;
         lightBulb = R.drawable.lightbulb;
         trash = findViewById(R.id.trash); int[] arrayTrash = {cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb};
-        Drawable draw = getResources().getDrawable(arrayTrash[randomize]);
-        this.trash.setImageDrawable(draw); this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
+        Drawable draw = getResources().getDrawable(arrayTrash[randomize]); this.trash.setImageDrawable(draw);
+        this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
         trashOut = "TRASH";
     }
+
     public void recyclable(int randomize)
     {
         int brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle;
@@ -153,10 +138,11 @@ public class MainActivity extends AppCompatActivity
         trashPaper = R.drawable.trashpaper;
         mineralBottle = R.drawable.mineralbottle;
         trash = findViewById(R.id.trash); int[] arrayRecyclable = {brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle};
-        Drawable draw = getResources().getDrawable(arrayRecyclable[randomize]);
-        this.trash.setImageDrawable(draw); this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
+        Drawable draw = getResources().getDrawable(arrayRecyclable[randomize]); this.trash.setImageDrawable(draw);
+        this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
         trashOut = "RECYCLABLE";
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void wrongAnswer()
     {
@@ -165,6 +151,7 @@ public class MainActivity extends AppCompatActivity
         if(livesCount == 1) {lives.setImageDrawable(getDrawable(livesOne));}
         if(livesCount == 0) {noLivesLeft();}
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void loseDialog()
     {
@@ -181,24 +168,26 @@ public class MainActivity extends AppCompatActivity
         LinearLayout.LayoutParams layoutParamsNegative = (LinearLayout.LayoutParams) btnNegative.getLayoutParams();
         btnPositive.setBackground(getDrawable(R.drawable.alert_dialog_yes)); btnNegative.setBackground(getDrawable(R.drawable.alert_dialog_no));
         btnNegative.setTextColor(Color.parseColor("#000000")); btnPositive.setTextColor(Color.parseColor("#000000"));
-        btnPositive.setTextSize(25); btnNegative.setTextSize(25);
+        btnPositive.setTextSize(35); btnNegative.setTextSize(351);
         layoutParamsPositive.weight = 10; layoutParamsNegative.weight = 10;
         btnPositive.setLayoutParams(layoutParamsPositive); btnNegative.setLayoutParams(layoutParamsNegative);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startGame()
     {
         trashType();
-        lives.setVisibility(View.VISIBLE);
-        lives.setImageDrawable(getDrawable(R.drawable.life_three));
+        score = 0;
         livesCount=3;
-        score = 0; lblScore.setText("Score: " + score);
-        trashBin.setVisibility(View.VISIBLE);
-        recyclableBin.setVisibility(View.VISIBLE);
+        lblScore.setText("Score: " + score);
+        lives.setVisibility(View.VISIBLE);
         player.setVisibility(View.VISIBLE);
+        trashBin.setVisibility(View.VISIBLE);
         trashName.setVisibility(View.VISIBLE);
-        recyclableName.setVisibility(View.VISIBLE);
         btnStart.setVisibility(View.INVISIBLE);
+        recyclableBin.setVisibility(View.VISIBLE);
+        recyclableName.setVisibility(View.VISIBLE);
+        lives.setImageDrawable(getDrawable(R.drawable.life_three));
         Log.e("values", "X: " + trash.getX() + "Y: " + trash.getY());
     }
     //SETUP COMPONENTS
@@ -206,18 +195,16 @@ public class MainActivity extends AppCompatActivity
     public void setup()
     {
         //INSTANTIATION
-        btnStart = findViewById(R.id.StartGame);
         lives = findViewById(R.id.lives);
-        trashBin = findViewById(R.id.binTrash);
-        recyclableBin = findViewById(R.id.binRecyclable);
         player = findViewById(R.id.trash);
-        livesNull = R.drawable.life_null;
-        livesOne = R.drawable.life_one;
-        livesTwo = R.drawable.life_two;
-        livesThree = R.drawable.life_three;
-        trashName = findViewById(R.id.trashName);
-        recyclableName = findViewById(R.id.recyclableName);
+        trashBin = findViewById(R.id.binTrash);
         lblScore = findViewById(R.id.lblScore);
+        btnStart = findViewById(R.id.StartGame);
+        trashName = findViewById(R.id.trashName);
+        recyclableBin = findViewById(R.id.binRecyclable);
+        recyclableName = findViewById(R.id.recyclableName);
+        livesNull = R.drawable.life_null; livesOne = R.drawable.life_one;
+        livesTwo = R.drawable.life_two; livesThree = R.drawable.life_three;
         lblScore.setText("Score: " + score);
     }
 
@@ -226,13 +213,13 @@ public class MainActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void noLivesLeft()
     {
-        lives.setImageDrawable(getDrawable(livesNull));
         trash.setVisibility(View.INVISIBLE);
-        trashBin.setVisibility(View.INVISIBLE);
-        recyclableBin.setVisibility(View.INVISIBLE);
-        trashName.setVisibility(View.INVISIBLE);
-        recyclableName.setVisibility(View.INVISIBLE);
         lives.setVisibility(View.INVISIBLE);
+        trashBin.setVisibility(View.INVISIBLE);
+        trashName.setVisibility(View.INVISIBLE);
+        recyclableBin.setVisibility(View.INVISIBLE);
+        recyclableName.setVisibility(View.INVISIBLE);
+        lives.setImageDrawable(getDrawable(livesNull));
         loseDialog();
     }
 }
