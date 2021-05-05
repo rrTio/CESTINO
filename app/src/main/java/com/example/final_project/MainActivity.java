@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.icu.util.Output;
 import android.os.Build;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -16,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.Arrays;
 import java.util.Random;
-
 public class MainActivity extends AppCompatActivity
 {
     Button btnStart;
@@ -47,74 +47,65 @@ public class MainActivity extends AppCompatActivity
                 {
                     //USER'S TOUCH
                     case MotionEvent.ACTION_DOWN: xDown = event.getX(); yDown = event.getY(); break;
-
                     //USER'S MOTION
                     case MotionEvent.ACTION_MOVE:
                         movedX = event.getX(); movedY = event.getY();
                         distanceX = movedX - xDown; distanceY = movedY - yDown;
                         player.setX(player.getX() + distanceX); player.setY(player.getY() + distanceY);
                         break;
-
                     //USER'S TOUCH RELEASED
                     case MotionEvent.ACTION_UP:
                         //FOR TRASH
                         checkCollisionTrash();
-                        if(collisionTrash == true)
+                        if(collisionTrash)
                         {
-                            trash.setImageDrawable(null); trashType();
                             if (trashOut == "TRASH")
                             {score++; lblScore.setText("Score: " + score); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
-                            else{wrongAnswer(); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
+                            else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
                         }
-
                         //FOR RECYCLABLE
                         checkCollisionRecyclable();
-                        if(collisionRecyclable == true)
+                        if(collisionRecyclable)
                         {
-                            trash.setImageDrawable(null); trashType();
                             if (trashOut == "RECYCLABLE")
                             {score++; lblScore.setText("Score: " + score); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
                         }
+                        trash.setImageDrawable(null); trashType();
                         break;
                 }
                 return true;
             }
         });
     }
-
     public void checkCollisionTrash()
     {
-        //SETUP RECT FOR IMAGEVIEWS
         playerImage = new Rect(); trashImage = new Rect();
         player.getHitRect(playerImage); trashBin.getHitRect(trashImage);
-        //COLLISION CHECKER FOR IMAGEVIEWS
         if(playerImage.intersect(trashImage)) {collisionTrash = true;} else {collisionTrash = false;}
     }
-
     public void checkCollisionRecyclable()
     {
-        //SETUP RECT FOR IMAGEVIEWS
         playerImage = new Rect(); recyclableImage = new Rect();
         player.getHitRect(playerImage); recyclableBin.getHitRect(recyclableImage);
-        //COLLISION CHECKER FOR IMAGEVIEWS
         if(playerImage.intersect(recyclableImage)) {collisionRecyclable = true;} else {collisionRecyclable = false;}
     }
-
     //ARRAYS FOR IMAGES AND VALUES
-    public String trashType()
+    public void trashType()
     {
-        final int trashValue = new Random().nextInt(2);
-        int randomize = new Random().nextInt(trashBounds);
-        String[] trashType = {"TRASH", "RECYCLABLE"}; String output = trashType[trashValue];
-        if(output == "TRASH") {trash(randomize);} if(output == "RECYCLABLE") {recyclable(randomize);}
-        Log.e("values", output); return output;
+        String[] trashType = {"TRASH", "RECYCLABLE"};
+        final int trashValue = new Random().nextInt(trashType.length);
+        String output = trashType[trashValue];
+        if(output.equals("TRASH")) {trash();}
+        if(output.equals("RECYCLABLE")) {recyclable();}
+        trashOut = output;
+        Log.e("values", "TRASH TYPE: " + trashOut);
     }
-
     //ARRAYS FOR RANDOM IMAGES
-    public void trash(int randomize)
+    public void trash()
     {
         int cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb;
+
         mask = R.drawable.mask;
         apple = R.drawable.apple;
         cheese = R.drawable.cheese;
@@ -123,21 +114,23 @@ public class MainActivity extends AppCompatActivity
         eggshell = R.drawable.eggshell;
         fishBone = R.drawable.fishbone;
         lightBulb = R.drawable.lightbulb;
+
         trash = findViewById(R.id.trash); int[] arrayTrash = {cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb};
+        int randomize = new Random().nextInt(arrayTrash.length);
         Drawable draw = getResources().getDrawable(arrayTrash[randomize]); this.trash.setImageDrawable(draw);
         this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
+
         trashIndex = getArrayIndex(arrayTrash, arrayTrash[randomize]);
         String strArray = Arrays.toString(arrayTrash);
         String strElement = String.valueOf(arrayTrash[randomize]);
         Log.e("values", "TRASH OUTPUT INDEX: " + trashIndex);
         Log.e("values", "TRASH ARRAY TO STRING: " + strArray);
         Log.e("values", "TRASH ELEMENT: " + strElement);
-        trashOut = "TRASH";
     }
-
-    public void recyclable(int randomize)
+    public void recyclable()
     {
         int brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle;
+
         can = R.drawable.can;
         milk = R.drawable.milk;
         plastic = R.drawable.plastic;
@@ -146,18 +139,19 @@ public class MainActivity extends AppCompatActivity
         brownPaper = R.drawable.brownpaper;
         trashPaper = R.drawable.trashpaper;
         mineralBottle = R.drawable.mineralbottle;
+
         trash = findViewById(R.id.trash); int[] arrayRecyclable = {brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle};
+        int randomize = new Random().nextInt(arrayRecyclable.length);
         Drawable draw = getResources().getDrawable(arrayRecyclable[randomize]); this.trash.setImageDrawable(draw);
         this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
+
         recyclableIndex = getArrayIndex(arrayRecyclable, arrayRecyclable[randomize]);
         String strArray = Arrays.toString(arrayRecyclable);
         String strElement = String.valueOf(arrayRecyclable[randomize]);
         Log.e("values", "RECYCLABLE OUTPUT INDEX: " + recyclableIndex);
         Log.e("values", "RECYCLABLE ARRAY TO STRING: " + strArray);
         Log.e("values", "RECYCLABLE ELEMENT: " + strElement);
-        trashOut = "RECYCLABLE";
     }
-
     public static int getArrayIndex(int[] array, int values)
     {
         if (array == null) {return -1;}
@@ -173,7 +167,6 @@ public class MainActivity extends AppCompatActivity
         if(livesCount == 1) {lives.setImageDrawable(getDrawable(livesOne));}
         if(livesCount == 0) {noLivesLeft();}
     }
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void loseDialog()
     {
@@ -194,7 +187,6 @@ public class MainActivity extends AppCompatActivity
         layoutParamsPositive.weight = 10; layoutParamsNegative.weight = 10;
         btnPositive.setLayoutParams(layoutParamsPositive); btnNegative.setLayoutParams(layoutParamsNegative);
     }
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startGame()
     {
@@ -210,7 +202,7 @@ public class MainActivity extends AppCompatActivity
         recyclableBin.setVisibility(View.VISIBLE);
         recyclableName.setVisibility(View.VISIBLE);
         lives.setImageDrawable(getDrawable(R.drawable.life_three));
-        Log.e("values", "COORDINATES:\nX Coordinate: " + trash.getX() + "\nY Coordinate: " + trash.getY());
+        Log.e("values", "COORDINATES:\nX: " + trash.getX() + "\nY: " + trash.getY());
     }
 
     //SETUP COMPONENTS
@@ -230,9 +222,7 @@ public class MainActivity extends AppCompatActivity
         livesTwo = R.drawable.life_two; livesThree = R.drawable.life_three;
         lblScore.setText("Score: " + score);
     }
-
     public void returnHome() {Intent intent = new Intent(MainActivity.this, MainMenu.class); startActivity(intent);}
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void noLivesLeft()
     {
