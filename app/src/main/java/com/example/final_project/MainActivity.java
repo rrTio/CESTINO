@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     int score = 0, livesCount = 3, trashBounds = 7, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, xCoordinate = 460.0F, yCoordinate = 250.0F;
     String trashOut;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity
         //SETUP RECT FOR IMAGEVIEWS
         playerImage = new Rect(); trashImage = new Rect();
         player.getHitRect(playerImage); trashBin.getHitRect(trashImage);
+
         //COLLISION CHECKER FOR IMAGEVIEWS
         if(playerImage.intersect(trashImage)) {collisionTrash = true;} else {collisionTrash = false;}
     }
@@ -161,7 +163,7 @@ public class MainActivity extends AppCompatActivity
     {
         if (array == null) {return -1;}
         int len = array.length; int i = 0;
-        while (i < len) { if (array[i] == values) {return i;} else {i=i+1;} } return -1;
+        while (i < len) { if (array[i] == values) {return i;} else {i+=1;} } return -1;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -209,8 +211,9 @@ public class MainActivity extends AppCompatActivity
         recyclableBin.setVisibility(View.VISIBLE);
         recyclableName.setVisibility(View.VISIBLE);
         lives.setImageDrawable(getDrawable(R.drawable.life_three));
-        Log.e("values", "X: " + trash.getX() + "Y: " + trash.getY());
+        Log.e("values", "COORDINATES:\nX: " + trash.getX() + "\nY: " + trash.getY());
     }
+
     //SETUP COMPONENTS
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void setup()
