@@ -127,10 +127,10 @@ public class MainActivity extends AppCompatActivity
         this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
         trashIndex = getArrayIndex(arrayTrash, arrayTrash[randomize]);
         String strArray = Arrays.toString(arrayTrash);
-        String strIndex = String.valueOf(arrayTrash[randomize]);
+        String strElement = String.valueOf(arrayTrash[randomize]);
         Log.e("values", "TRASH OUTPUT INDEX: " + trashIndex);
         Log.e("values", "TRASH ARRAY TO STRING: " + strArray);
-        Log.e("values", "TRASH ELEMENT: " + strIndex);
+        Log.e("values", "TRASH ELEMENT: " + strElement);
         trashOut = "TRASH";
     }
 
@@ -150,10 +150,10 @@ public class MainActivity extends AppCompatActivity
         this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
         recyclableIndex = getArrayIndex(arrayRecyclable, arrayRecyclable[randomize]);
         String strArray = Arrays.toString(arrayRecyclable);
-        String strIndex = String.valueOf(arrayRecyclable[randomize]);
+        String strElement = String.valueOf(arrayRecyclable[randomize]);
         Log.e("values", "RECYCLABLE OUTPUT INDEX: " + recyclableIndex);
         Log.e("values", "RECYCLABLE ARRAY TO STRING: " + strArray);
-        Log.e("values", "RECYCLABLE ELEMENT: " + strIndex);
+        Log.e("values", "RECYCLABLE ELEMENT: " + strElement);
         trashOut = "RECYCLABLE";
     }
 
@@ -161,8 +161,7 @@ public class MainActivity extends AppCompatActivity
     {
         if (array == null) {return -1;}
         int len = array.length; int i = 0;
-        while (i < len) { if (array[i] == values) {return i;} else {i=i+1;} }
-        return -1;
+        while (i < len) { if (array[i] == values) {return i;} else {i=i+1;} } return -1;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
