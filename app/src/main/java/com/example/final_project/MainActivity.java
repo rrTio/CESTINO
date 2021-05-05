@@ -14,9 +14,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
 import java.util.Arrays;
 import java.util.Random;
+
 public class MainActivity extends AppCompatActivity
 {
     Button btnStart;
@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity
         //SETUP RECT FOR IMAGEVIEWS
         playerImage = new Rect(); trashImage = new Rect();
         player.getHitRect(playerImage); trashBin.getHitRect(trashImage);
-
         //COLLISION CHECKER FOR IMAGEVIEWS
         if(playerImage.intersect(trashImage)) {collisionTrash = true;} else {collisionTrash = false;}
     }
@@ -211,7 +210,7 @@ public class MainActivity extends AppCompatActivity
         recyclableBin.setVisibility(View.VISIBLE);
         recyclableName.setVisibility(View.VISIBLE);
         lives.setImageDrawable(getDrawable(R.drawable.life_three));
-        Log.e("values", "COORDINATES:\nX: " + trash.getX() + "\nY: " + trash.getY());
+        Log.e("values", "COORDINATES:\nX Coordinate: " + trash.getX() + "\nY Coordinate: " + trash.getY());
     }
 
     //SETUP COMPONENTS
