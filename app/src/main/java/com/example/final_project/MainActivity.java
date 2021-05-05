@@ -14,6 +14,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import java.util.Arrays;
 import java.util.Random;
 public class MainActivity extends AppCompatActivity
 {
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity
     TextView lblScore, trashName, recyclableName;
     ImageView player, trashBin, recyclableBin, lives, trash;
     boolean collisionTrash = false, collisionRecyclable = false;
-    int score = 0, livesCount = 3, trashBounds = 7, livesNull, livesOne, livesTwo, livesThree;
+    int score = 0, livesCount = 3, trashBounds = 7, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, xCoordinate = 460.0F, yCoordinate = 250.0F;
     String trashOut;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -123,6 +125,12 @@ public class MainActivity extends AppCompatActivity
         trash = findViewById(R.id.trash); int[] arrayTrash = {cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb};
         Drawable draw = getResources().getDrawable(arrayTrash[randomize]); this.trash.setImageDrawable(draw);
         this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
+        trashIndex = getArrayIndex(arrayTrash, arrayTrash[randomize]);
+        String strArray = Arrays.toString(arrayTrash);
+        String strIndex = String.valueOf(arrayTrash[randomize]);
+        Log.e("values", "TRASH OUTPUT INDEX: " + trashIndex);
+        Log.e("values", "TRASH ARRAY TO STRING: " + strArray);
+        Log.e("values", "TRASH ELEMENT: " + strIndex);
         trashOut = "TRASH";
     }
 
@@ -140,7 +148,21 @@ public class MainActivity extends AppCompatActivity
         trash = findViewById(R.id.trash); int[] arrayRecyclable = {brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle};
         Drawable draw = getResources().getDrawable(arrayRecyclable[randomize]); this.trash.setImageDrawable(draw);
         this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
+        recyclableIndex = getArrayIndex(arrayRecyclable, arrayRecyclable[randomize]);
+        String strArray = Arrays.toString(arrayRecyclable);
+        String strIndex = String.valueOf(arrayRecyclable[randomize]);
+        Log.e("values", "RECYCLABLE OUTPUT INDEX: " + recyclableIndex);
+        Log.e("values", "RECYCLABLE ARRAY TO STRING: " + strArray);
+        Log.e("values", "RECYCLABLE ELEMENT: " + strIndex);
         trashOut = "RECYCLABLE";
+    }
+
+    public static int getArrayIndex(int[] array, int values)
+    {
+        if (array == null) {return -1;}
+        int len = array.length; int i = 0;
+        while (i < len) { if (array[i] == values) {return i;} else {i=i+1;} }
+        return -1;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
