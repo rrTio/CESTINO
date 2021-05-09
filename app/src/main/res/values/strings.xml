@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">Final-Project</string>
+    <string name="styrofoam">Styrofoams takes over 500 years to decompose and in the process, it leaches harmful chemicals into the environment.</string>
+    <string name="apple">Two-thirds of an apple’s anti-oxidants and much of its fiber are found in the skin.</string>
+    <string name="fishbones">Fish bones have been used to bioremediate lead from contaminated soil.</string>
+    <string name="eggshell">Eggshells are rich in calcium and other minerals that help your garden thrive, which is why they make a great fertilizer.</string>
+    <string name="banana">Organic acids concentrated in the banana skins help regulate the pH of the skin and reduce the appearance of acne and blackheads.</string>
+    <string name="mask">Surgical masks should wear anyone over the age of 2, provided they don’t have specific illnesses and conditions which prevent them from wearing a mask.</string>
+    <string name="batteries">Batteries contain harmful substances including mercury, cadmium and lead. These chemicals and materials can be dangerous if mixed with other waste streams and cause damage to the environment if placed in landfill. So you should dispose it properly.</string>
+    <string name="brownpaper">If 1 ton of paper bags are recycled, this saves around 3.3 cubic yards of landfill space. With the increase in population every day, the need for more viable space to store and process waste is vital to global survival.</string>
+    <string name="milk">On average, a cow produces 6.3 gallons of milk each day.</string>
+    <string name="newspaper">The first Philippine newspaper was established in 1811. Del Superior Govierno was published with the Spanish Governor General himself as editor.</string>
+    <string name="can">That the worldwide production for all drink cans is approximately 370 billion cans per year.</string>
+    <string name="paper">That the largest sheet of handmade paper was made by Masaki Takahashi and Kazuki Maeda in Toyama, Japan on 19th August 2009.</string>
+    <string name="plastic">That every piece of plastic that was ever produced still exists. And more than 5 trillion pieces of plastic are already floating in our oceans.</string>
+    <string name="mineralbottle">The Holy Well Bottling Plant in the United Kingdom was the first bottling water plant in the world. It is widely believed that the selling of bottled water began in the plant in 1622.</string>
+    <string name="lightbulb">Any lamps and light bulbs contain mercury, which is dangerous to the environment, especially water sources.</string>
+    <string name="cheese">The latin word for ‘cheese’ is ‘caseus’ which means ‘to ferment and sour’.</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

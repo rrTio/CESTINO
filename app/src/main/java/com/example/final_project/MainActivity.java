@@ -25,12 +25,12 @@ public class MainActivity extends AppCompatActivity
     Button btnStart;
     EditText username;
     Rect playerImage, trashImage, recyclableImage;
-    TextView lblScore, trashName, recyclableName;
+    TextView lblScore, trashName, recyclableName, lblTrivia;
     ImageView player, trashBin, recyclableBin, lives, trash;
     boolean collisionTrash = false, collisionRecyclable = false;
     int score = 0, livesCount = 3, trashBounds = 7, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, xCoordinate = 460.0F, yCoordinate = 250.0F;
-    String trashOut, playerName;
+    String trashOut, playerName, strMilk, strBrownPaper, strCheese, strEggshell, strFishbone, strBanana, strApple, strMask, strBattery, strLightbulb, strNewspaper, strStyrofoam, strCan, strPaper, strPlastic, strMineralbottle;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("ClickableViewAccessibility")
@@ -70,16 +70,57 @@ public class MainActivity extends AppCompatActivity
                         checkCollisionTrash();
                         if(collisionTrash)
                         {
+
+
                             if (trashOut == "TRASH")
-                            {score++; lblScore.setText("Score: " + score); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
+                            {score++;
+                                trashTrivia();
+                                if (trashIndex == 0)
+                                { lblTrivia.setText(strCheese); }
+                                if (trashIndex == 1)
+                                { lblTrivia.setText(strEggshell); }
+                                if (trashIndex == 2)
+                                { lblTrivia.setText(strFishbone); }
+                                if (trashIndex == 3)
+                                { lblTrivia.setText(strBanana); }
+                                if (trashIndex == 4)
+                                { lblTrivia.setText(strApple); }
+                                if (trashIndex == 5)
+                                { lblTrivia.setText(strMask); }
+                                if (trashIndex == 6)
+                                { lblTrivia.setText(strBattery); }
+                                if (trashIndex == 7)
+                                { lblTrivia.setText(strLightbulb); }
+                                lblScore.setText("Score: " + score); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
                         }
                         //FOR RECYCLABLE
                         checkCollisionRecyclable();
                         if(collisionRecyclable)
                         {
+
                             if (trashOut == "RECYCLABLE")
-                            {score++; lblScore.setText("Score: " + score); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
+                            {
+                                score++;
+                                recyclableTrivia();
+                                if (recyclableIndex == 0)
+                                { lblTrivia.setText(strBrownPaper); }
+                                if (recyclableIndex == 1)
+                                { lblTrivia.setText(strMilk); }
+                                if (recyclableIndex == 2)
+                                { lblTrivia.setText(strNewspaper); }
+                                if (recyclableIndex == 3)
+                                { lblTrivia.setText(strStyrofoam); }
+                                if (recyclableIndex == 4)
+                                { lblTrivia.setText(strCan); }
+                                if (recyclableIndex == 5)
+                                { lblTrivia.setText(strPaper); }
+                                if (recyclableIndex == 6)
+                                { lblTrivia.setText(strPlastic); }
+                                if (recyclableIndex == 7)
+                                { lblTrivia.setText(strMineralbottle); }
+                                lblScore.setText("Score: " + score);
+                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
                         }
                         trash.setImageDrawable(null); trashType();
@@ -226,12 +267,29 @@ public class MainActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void setup()
     {
+        strBrownPaper = getResources().getString(R.string.brownpaper);
+        strLightbulb = getResources().getString(R.string.lightbulb);
+        strNewspaper = getResources().getString(R.string.newspaper);
+        strStyrofoam = getResources().getString(R.string.styrofoam);
+        strCan = getResources().getString(R.string.can);
+        strPaper = getResources().getString(R.string.paper);
+        strPlastic = getResources().getString(R.string.plastic);
+        strMineralbottle = getResources().getString(R.string.mineralbottle);
+        strEggshell = getResources().getString(R.string.eggshell);
+        strBanana = getResources().getString(R.string.banana);
+        strApple = getResources().getString(R.string.apple);
+        strMask = getResources().getString(R.string.mask);
+        strBattery = getResources().getString(R.string.batteries);
+        strFishbone = getResources().getString(R.string.fishbones);
+        strCheese = getResources().getString(R.string.cheese);
+        strMilk = getResources().getString(R.string.milk);
         lives = findViewById(R.id.lives);
         player = findViewById(R.id.trash);
         username = findViewById(R.id.txtName);
         trashBin = findViewById(R.id.binTrash);
         lblScore = findViewById(R.id.lblScore);
         btnStart = findViewById(R.id.StartGame);
+        lblTrivia = findViewById(R.id.lbl_trivia);
         trashName = findViewById(R.id.trashName);
         recyclableBin = findViewById(R.id.binRecyclable);
         recyclableName = findViewById(R.id.recyclableName);
@@ -258,5 +316,53 @@ public class MainActivity extends AppCompatActivity
     public void addToDatabase()
     {
 
+    }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void trashTrivia()
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.custom_alert_dialog_trivia);
+        Log.e("status", "LOSE");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener()
+        {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override public void onClick(DialogInterface dialog, int which) {startGame(); dialog.dismiss();}});
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener()
+        {@Override public void onClick(DialogInterface dialog, int which) {returnHome(); dialog.dismiss();}});
+
+        AlertDialog dialog = builder.create(); dialog.show();
+        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE); Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        LinearLayout.LayoutParams layoutParamsPositive = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        LinearLayout.LayoutParams layoutParamsNegative = (LinearLayout.LayoutParams) btnNegative.getLayoutParams();
+        btnPositive.setBackground(getDrawable(R.drawable.alert_dialog_yes)); btnNegative.setBackground(getDrawable(R.drawable.alert_dialog_no));
+        btnNegative.setTextColor(Color.parseColor("#000000")); btnPositive.setTextColor(Color.parseColor("#000000"));
+        btnPositive.setTextSize(35); btnNegative.setTextSize(35);
+        layoutParamsPositive.weight = 10; layoutParamsNegative.weight = 10;
+        btnPositive.setLayoutParams(layoutParamsPositive); btnNegative.setLayoutParams(layoutParamsNegative);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void recyclableTrivia()
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.custom_alert_dialog_trivia);
+        Log.e("status", "LOSE");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener()
+        {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override public void onClick(DialogInterface dialog, int which) {startGame(); dialog.dismiss();}});
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener()
+        {@Override public void onClick(DialogInterface dialog, int which) {returnHome(); dialog.dismiss();}});
+
+        AlertDialog dialog = builder.create(); dialog.show();
+        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE); Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        LinearLayout.LayoutParams layoutParamsPositive = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        LinearLayout.LayoutParams layoutParamsNegative = (LinearLayout.LayoutParams) btnNegative.getLayoutParams();
+        btnPositive.setBackground(getDrawable(R.drawable.alert_dialog_yes)); btnNegative.setBackground(getDrawable(R.drawable.alert_dialog_no));
+        btnNegative.setTextColor(Color.parseColor("#000000")); btnPositive.setTextColor(Color.parseColor("#000000"));
+        btnPositive.setTextSize(35); btnNegative.setTextSize(35);
+        layoutParamsPositive.weight = 10; layoutParamsNegative.weight = 10;
+        btnPositive.setLayoutParams(layoutParamsPositive); btnNegative.setLayoutParams(layoutParamsNegative);
     }
 }
