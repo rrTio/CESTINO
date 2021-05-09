@@ -43,7 +43,7 @@
             android:fontFamily="@font/heyfun"
             android:textStyle="bold"
     />
-    
+
     <EditText
             android:id="@+id/txtName"
             android:layout_width="250dp"
