@@ -17,16 +17,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Calendar;
+
+
 public class MainActivity extends AppCompatActivity
 {
     Button btnStart;
+    EditText username;
     Rect playerImage, trashImage, recyclableImage;
     TextView lblScore, trashName, recyclableName;
     ImageView player, trashBin, recyclableBin, lives, trash;
     boolean collisionTrash = false, collisionRecyclable = false;
     int score = 0, livesCount = 3, trashBounds = 7, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, xCoordinate = 460.0F, yCoordinate = 250.0F;
-    String trashOut;
+    String trashOut, playerName;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("ClickableViewAccessibility")
@@ -37,7 +41,15 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         setup();
 
-        btnStart.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {startGame();}});
+        btnStart.setOnClickListener(new View.OnClickListener()
+        {
+            @Override public void onClick(View v)
+            {
+                playerName = username.getText().toString();
+                if(!playerName.isEmpty()) {startGame();}
+                else {Toast.makeText(MainActivity.this, "INPUT USERNAME FIRST", Toast.LENGTH_SHORT).show();}
+            }
+        });
 
         player.setOnTouchListener(new View.OnTouchListener()
         {
@@ -216,6 +228,7 @@ public class MainActivity extends AppCompatActivity
     {
         lives = findViewById(R.id.lives);
         player = findViewById(R.id.trash);
+        username = findViewById(R.id.txtName);
         trashBin = findViewById(R.id.binTrash);
         lblScore = findViewById(R.id.lblScore);
         btnStart = findViewById(R.id.StartGame);
@@ -240,5 +253,10 @@ public class MainActivity extends AppCompatActivity
         recyclableName.setVisibility(View.INVISIBLE);
         lives.setImageDrawable(getDrawable(livesNull));
         loseDialog();
+    }
+
+    public void addToDatabase()
+    {
+
     }
 }

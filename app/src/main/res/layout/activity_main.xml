@@ -43,6 +43,21 @@
             android:fontFamily="@font/heyfun"
             android:textStyle="bold"
     />
+    
+    <EditText
+            android:id="@+id/txtName"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/StartGame"
+            android:background="@drawable/txt_name"
+            android:layout_marginTop="10dp"
+            android:hint="NAME"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:fontFamily="@font/heyfun"
+            android:textSize="35dp"
+    />
 
     <TextView
             android:id="@+id/trashName"
