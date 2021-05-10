@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         AlertDialog dialog = builder.create(); dialog.show();
-        TextView lblTrivia = dialog.findViewById(R.id.lbl_trivia);
+        lblTrivia = dialog.findViewById(R.id.lbl_trivia);
 
         if (trashIndex == 0) { lblTrivia.setText(strCheese);}
         if (trashIndex == 1) { lblTrivia.setText(strEggshell); }
@@ -326,7 +326,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         AlertDialog dialog = builder.create(); dialog.show();
-        TextView lblTrivia = dialog.findViewById(R.id.lbl_trivia);
+        lblTrivia = dialog.findViewById(R.id.lbl_trivia);
 
         if (recyclableIndex == 0) { lblTrivia.setText(strBrownPaper); }
         if (recyclableIndex == 1) { lblTrivia.setText(strMilk); }
