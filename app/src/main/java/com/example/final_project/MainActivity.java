@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.final_project.database.DBHandler;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -24,10 +25,11 @@ public class MainActivity extends AppCompatActivity
     Drawable draw;
     Button btnStart;
     EditText username;
+    DBHandler dbHandler;
     Rect playerImage, trashImage, recyclableImage;
     TextView lblScore, trashName, recyclableName, lblTrivia;
-    ImageView player, trashBin, recyclableBin, lives, trash, imageGarbage;
     boolean collisionTrash = false, collisionRecyclable = false;
+    ImageView player, trashBin, recyclableBin, lives, trash, imageGarbage;
     int score = 0, livesCount = 3, trashBounds = 7, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, xCoordinate = 460.0F, yCoordinate = 250.0F;
     String trashOut, playerName, strMilk, strBrownPaper, strCheese, strEggshell, strFishbone, strBanana, strApple, strMask, strBattery, strLightbulb, strNewspaper, strStyrofoam, strCan, strPaper, strPlastic, strMineralbottle;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setup();
+        dbHandler = new DBHandler(this);
 
         btnStart.setOnClickListener(new View.OnClickListener()
         {
@@ -204,7 +207,7 @@ public class MainActivity extends AppCompatActivity
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener()
         {@Override public void onClick(DialogInterface dialog, int which) {startGame(); dialog.dismiss();}});
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener()
-        {@Override public void onClick(DialogInterface dialog, int which) {returnHome(); dialog.dismiss();}});
+        {@Override public void onClick(DialogInterface dialog, int which) {returnHome(); addToDatabase(); dialog.dismiss();}});
 
         AlertDialog dialog = builder.create(); dialog.show();
         Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE); Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
@@ -355,4 +358,13 @@ public class MainActivity extends AppCompatActivity
         btnPositive.setLayoutParams(layoutParamsPositive);
     }
 
+    public void addToDatabase()
+    {
+        try
+        {
+            int dbScore = Integer.parseInt(String.valueOf(score));
+            boolean status = dbHandler.addUserData(playerName, dbScore);
+            if(status) {Toast.makeText(this, "GAME OVER", Toast.LENGTH_SHORT).show();}
+        }catch (Exception e) {Toast.makeText(this, "ADD TO DATABASE FAILED", Toast.LENGTH_SHORT).show();}
+    }
 }

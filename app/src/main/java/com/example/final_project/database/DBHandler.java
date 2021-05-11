@@ -64,7 +64,7 @@ public class DBHandler extends SQLiteOpenHelper
     public boolean deleteUserData(DBOutput dbOutput)
     {
         SQLiteDatabase database = this.getWritableDatabase();
-        String delete = "DELETE FROM scores WHERE username = '" + dbOutput.getUsername() + "'";
+        String delete = "DELETE FROM leaderboards WHERE username = '" + dbOutput.getUsername() + "'";
         Cursor cursor = database.rawQuery(delete, null);
         if(cursor.moveToFirst()) { return true; } else  { return false; }
     }
