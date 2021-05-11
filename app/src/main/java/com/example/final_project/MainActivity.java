@@ -71,23 +71,26 @@ public class MainActivity extends AppCompatActivity
                         checkCollisionTrash();
                         if(collisionTrash)
                         {
+                            trashTrivia();
                             if (trashOut == "TRASH")
-                            {score++;
-                                trashTrivia();
-                                lblScore.setText("Score: " + score); Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
+                            {
+                                score++;
+                                lblScore.setText("Score: " + score);
+                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
+                            }
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
                         }
                         //FOR RECYCLABLE
                         checkCollisionRecyclable();
                         if(collisionRecyclable)
                         {
-
+                            recyclableTrivia();
                             if (trashOut == "RECYCLABLE")
                             {
                                 score++;
-                                recyclableTrivia();
                                 lblScore.setText("Score: " + score);
-                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();}
+                                Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
+                            }
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
                         }
                         trash.setImageDrawable(null); trashType();
@@ -138,8 +141,9 @@ public class MainActivity extends AppCompatActivity
 
         trash = findViewById(R.id.trash); int[] arrayTrash = {cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb};
         int randomize = new Random().nextInt(arrayTrash.length);
-        draw = getResources().getDrawable(arrayTrash[randomize]); this.trash.setImageDrawable(draw);
-        this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
+        draw = getResources().getDrawable(arrayTrash[randomize]);
+        trash.setX(xCoordinate); trash.setY(yCoordinate);
+        trash.setImageDrawable(draw);
 
         trashIndex = getArrayIndex(arrayTrash, arrayTrash[randomize]);
         String strArray = Arrays.toString(arrayTrash);
@@ -164,8 +168,9 @@ public class MainActivity extends AppCompatActivity
 
         trash = findViewById(R.id.trash); int[] arrayRecyclable = {brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle};
         int randomize = new Random().nextInt(arrayRecyclable.length);
-        draw = getResources().getDrawable(arrayRecyclable[randomize]); this.trash.setImageDrawable(draw);
-        this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
+        draw = getResources().getDrawable(arrayRecyclable[randomize]);
+        trash.setX(xCoordinate); trash.setY(yCoordinate);
+        trash.setImageDrawable(draw);
 
         recyclableIndex = getArrayIndex(arrayRecyclable, arrayRecyclable[randomize]);
         String strArray = Arrays.toString(arrayRecyclable);
