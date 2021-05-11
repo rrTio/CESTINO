@@ -22,11 +22,12 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
 {
+    Drawable draw;
     Button btnStart;
     EditText username;
     Rect playerImage, trashImage, recyclableImage;
     TextView lblScore, trashName, recyclableName, lblTrivia;
-    ImageView player, trashBin, recyclableBin, lives, trash;
+    ImageView player, trashBin, recyclableBin, lives, trash, imageGarbage;
     boolean collisionTrash = false, collisionRecyclable = false;
     int score = 0, livesCount = 3, trashBounds = 7, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, xCoordinate = 460.0F, yCoordinate = 250.0F;
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity
 
         trash = findViewById(R.id.trash); int[] arrayTrash = {cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb};
         int randomize = new Random().nextInt(arrayTrash.length);
-        Drawable draw = getResources().getDrawable(arrayTrash[randomize]); this.trash.setImageDrawable(draw);
+        draw = getResources().getDrawable(arrayTrash[randomize]); this.trash.setImageDrawable(draw);
         this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
 
         trashIndex = getArrayIndex(arrayTrash, arrayTrash[randomize]);
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity
 
         trash = findViewById(R.id.trash); int[] arrayRecyclable = {brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle};
         int randomize = new Random().nextInt(arrayRecyclable.length);
-        Drawable draw = getResources().getDrawable(arrayRecyclable[randomize]); this.trash.setImageDrawable(draw);
+        draw = getResources().getDrawable(arrayRecyclable[randomize]); this.trash.setImageDrawable(draw);
         this.trash.setX(xCoordinate); this.trash.setY(yCoordinate);
 
         recyclableIndex = getArrayIndex(arrayRecyclable, arrayRecyclable[randomize]);
@@ -293,6 +294,8 @@ public class MainActivity extends AppCompatActivity
 
         AlertDialog dialog = builder.create(); dialog.show();
         lblTrivia = dialog.findViewById(R.id.lbl_trivia);
+        imageGarbage = dialog.findViewById(R.id.imageIcon);
+        imageGarbage.setImageDrawable(draw);
 
         if (trashIndex == 0) { lblTrivia.setText(strCheese);}
         if (trashIndex == 1) { lblTrivia.setText(strEggshell); }
@@ -327,6 +330,8 @@ public class MainActivity extends AppCompatActivity
 
         AlertDialog dialog = builder.create(); dialog.show();
         lblTrivia = dialog.findViewById(R.id.lbl_trivia);
+        imageGarbage = dialog.findViewById(R.id.imageIcon);
+        imageGarbage.setImageDrawable(draw);
 
         if (recyclableIndex == 0) { lblTrivia.setText(strBrownPaper); }
         if (recyclableIndex == 1) { lblTrivia.setText(strMilk); }
@@ -339,7 +344,7 @@ public class MainActivity extends AppCompatActivity
 
         Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
         LinearLayout.LayoutParams layoutParamsPositive = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-        btnPositive.setBackground(getDrawable(R.drawable.alert_dialog_yes));
+        btnPositive.setBackground(getDrawable(R.drawable.alert_dialog_ok));
         btnPositive.setTextColor(Color.parseColor("#000000"));
         btnPositive.setTextSize(35);
         layoutParamsPositive.weight = 10;
