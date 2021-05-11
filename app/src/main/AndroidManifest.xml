@@ -9,7 +9,7 @@
             android:roundIcon="@mipmap/logo"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".Leaderboards">
+        <activity android:name=".Leaderboard">
         </activity>
         <activity android:name=".Instructions">
         </activity>

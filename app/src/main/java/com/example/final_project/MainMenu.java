@@ -34,7 +34,7 @@ public class MainMenu extends AppCompatActivity
 
     public void playGame() {Intent intent = new Intent(this, MainActivity.class); startActivity(intent);}
     public void openInstructions() {Intent intent = new Intent(this, Instructions.class); startActivity(intent);}
-    public void openLeaderboards() {Intent intent = new Intent(this, Leaderboards.class); startActivity(intent);}
+    public void openLeaderboards() {Intent intent = new Intent(this, Leaderboard.class); startActivity(intent);}
     public void quitGame()
     {
         Intent intent = new Intent(Intent.ACTION_MAIN);

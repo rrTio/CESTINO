@@ -8,7 +8,7 @@
           android:textSize="25dp"
           android:fontFamily="@font/heyfun"
           android:textStyle="bold"
-          android:textColor="#FFFFFF"
+          android:textColor="#000000"
           android:gravity="center"
           android:background="@drawable/custom_textview"
 />
