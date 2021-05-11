@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#808080"
         tools:context=".Leaderboards">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+            android:id="@+id/lblScore"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="SCORES"
+            android:textColor="#FFFFFF"
+            android:textSize="60dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:gravity="center"
+    />
+
+    <ListView
+        android:id="@+id/listScores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblScore"
+        android:layout_above="@id/btnReturnToMenu"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:divider="#FFFFFF"
+        android:dividerHeight="5dp"
+        android:footerDividersEnabled="true"
+
+    />
+
+    <Button
+        android:id="@+id/btnReturnToMenu"
+        android:layout_width="550dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:text="RETURN"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:background="@drawable/btn_return"
+    />
+
+</RelativeLayout>
