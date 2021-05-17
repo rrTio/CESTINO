@@ -20,6 +20,7 @@
             android:textSize="50dp"
             android:textColor="#000000"
             android:fontFamily="@font/heyfun"
+            android:visibility="invisible"
     />
 
     <ImageView
@@ -29,6 +30,7 @@
             android:layout_below="@id/lblScore"
             android:layout_marginLeft="15dp"
             android:src="@drawable/life_three"
+            android:visibility="invisible"
     />
 
     <Button
@@ -49,9 +51,9 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/StartGame"
+            android:layout_above="@id/StartGame"
             android:background="@drawable/txt_name"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:hint="NAME"
             android:gravity="center"
             android:textColor="#000000"
