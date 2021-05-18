@@ -6,21 +6,17 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.final_project.database.DBHandler;
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -75,7 +71,6 @@ public class MainActivity extends AppCompatActivity
                         break;
 
                     case MotionEvent.ACTION_UP:
-
                         //FOR TRASH
                         checkCollisionTrash();
                         if(collisionTrash)
@@ -380,5 +375,14 @@ public class MainActivity extends AppCompatActivity
             if(status) {Toast.makeText(this, "GAME OVER", Toast.LENGTH_SHORT).show();}
         }
         catch (Exception e) {Toast.makeText(this, "ADD TO DATABASE FAILED", Toast.LENGTH_SHORT).show();}
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory( Intent.CATEGORY_HOME ); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

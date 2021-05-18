@@ -41,4 +41,11 @@ public class MainMenu extends AppCompatActivity
         intent.addCategory( Intent.CATEGORY_HOME ); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        quitGame();
+    }
 }
