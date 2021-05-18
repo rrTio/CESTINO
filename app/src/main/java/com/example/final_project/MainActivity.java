@@ -6,11 +6,14 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
                             trash.setImageDrawable(null); trashType(); trash.setX(screenWidth); trash.setY(yCoordinate);
                         }
+
                         //FOR RECYCLABLE
                         checkCollisionRecyclable();
                         if(collisionRecyclable)
@@ -215,6 +219,7 @@ public class MainActivity extends AppCompatActivity
         builder.setNegativeButton("NO", (dialog, which) -> {returnHome(); addToDatabase(); dialog.dismiss();});
 
         AlertDialog dialog = builder.create(); dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE); Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         LinearLayout.LayoutParams layoutParamsPositive = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
         LinearLayout.LayoutParams layoutParamsNegative = (LinearLayout.LayoutParams) btnNegative.getLayoutParams();
