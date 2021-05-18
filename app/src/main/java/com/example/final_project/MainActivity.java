@@ -75,11 +75,11 @@ public class MainActivity extends AppCompatActivity
                         checkCollisionTrash();
                         if(collisionTrash)
                         {
-                            trashTrivia();
                             if (trashOut == "TRASH")
                             {
                                 score++;
                                 lblScore.setText("Score: " + score);
+                                trashTrivia();
                                 Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
                             }
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
@@ -90,10 +90,10 @@ public class MainActivity extends AppCompatActivity
                         checkCollisionRecyclable();
                         if(collisionRecyclable)
                         {
-                            recyclableTrivia();
                             if (trashOut == "RECYCLABLE")
                             {
                                 score++;
+                                recyclableTrivia();
                                 lblScore.setText("Score: " + score);
                                 Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
                             }

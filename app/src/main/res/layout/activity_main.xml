@@ -59,6 +59,7 @@
             android:textColor="#000000"
             android:fontFamily="@font/heyfun"
             android:textSize="35dp"
+            android:textColorHint="#000000"
     />
 
     <TextView
