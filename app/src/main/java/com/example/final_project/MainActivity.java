@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity
                         break;
 
                     case MotionEvent.ACTION_UP:
+
                         //FOR TRASH
                         checkCollisionTrash();
                         if(collisionTrash)
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity
                                 Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
                             }
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
+                            trash.setImageDrawable(null); trashType(); trash.setX(screenWidth); trash.setY(yCoordinate);
                         }
                         //FOR RECYCLABLE
                         checkCollisionRecyclable();
@@ -97,8 +99,10 @@ public class MainActivity extends AppCompatActivity
                                 Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
                             }
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
+                            trash.setImageDrawable(null); trashType(); trash.setX(screenWidth); trash.setY(yCoordinate);
                         }
-                        trash.setImageDrawable(null); trashType(); trash.setX(screenWidth); trash.setY(yCoordinate);
+
+                        if(!collisionTrash || !collisionRecyclable) {trash.setX(screenWidth); trash.setY(yCoordinate);}
                         break;
                 }
                 return true;
@@ -207,10 +211,8 @@ public class MainActivity extends AppCompatActivity
         builder.setView(R.layout.custom_alert_dialog_lose);
         Log.e("status", "LOSE");
 
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener()
-        {@Override public void onClick(DialogInterface dialog, int which) {startGame(); dialog.dismiss();}});
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener()
-        {@Override public void onClick(DialogInterface dialog, int which) {returnHome(); addToDatabase(); dialog.dismiss();}});
+        builder.setPositiveButton("YES", (dialog, which) -> {startGame(); dialog.dismiss();});
+        builder.setNegativeButton("NO", (dialog, which) -> {returnHome(); addToDatabase(); dialog.dismiss();});
 
         AlertDialog dialog = builder.create(); dialog.show();
         Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE); Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
@@ -223,6 +225,7 @@ public class MainActivity extends AppCompatActivity
         btnPositive.setLayoutParams(layoutParamsPositive); btnNegative.setLayoutParams(layoutParamsNegative);
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startGame()
     {
@@ -243,6 +246,7 @@ public class MainActivity extends AppCompatActivity
         Log.e("values", "COORDINATES:\nX: " + trash.getX() + "\nY: " + trash.getY());
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void setup()
     {
@@ -300,11 +304,7 @@ public class MainActivity extends AppCompatActivity
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.custom_alert_dialog_trivia);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-        {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override public void onClick(DialogInterface dialog, int which) {dialog.dismiss();}
-        });
+        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create(); dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
