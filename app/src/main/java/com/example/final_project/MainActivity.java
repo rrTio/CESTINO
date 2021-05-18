@@ -1,4 +1,5 @@
 package com.example.final_project;
+
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,7 +21,6 @@ import com.example.final_project.database.DBHandler;
 import java.util.Arrays;
 import java.util.Random;
 
-
 public class MainActivity extends AppCompatActivity
 {
     Drawable draw;
@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity
     TextView lblScore, trashName, recyclableName, lblTrivia;
     boolean collisionTrash = false, collisionRecyclable = false;
     ImageView player, trashBin, recyclableBin, lives, trash, imageGarbage;
-    int score = 0, livesCount = 3, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree, screenWidth;
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, yCoordinate = 250.0F;
+    int score = 0, livesCount = 3, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree, screenWidth;
     String trashOut, playerName, strMilk, strBrownPaper, strCheese, strEggshell, strFishbone, strBanana, strApple, strMask, strBattery, strLightbulb, strNewspaper, strStyrofoam, strCan, strPaper, strPlastic, strMineralbottle;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -108,21 +108,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
-    public void checkCollisionTrash()
-    {
-        playerImage = new Rect(); trashImage = new Rect();
-        player.getHitRect(playerImage); trashBin.getHitRect(trashImage);
-        if(playerImage.intersect(trashImage)) {collisionTrash = true;} else {collisionTrash = false;}
-    }
-
-    public void checkCollisionRecyclable()
-    {
-        playerImage = new Rect(); recyclableImage = new Rect();
-        player.getHitRect(playerImage); recyclableBin.getHitRect(recyclableImage);
-        if(playerImage.intersect(recyclableImage)) {collisionRecyclable = true;} else {collisionRecyclable = false;}
-    }
-
+    
     public void trashType()
     {
         String[] trashType = {"TRASH", "RECYCLABLE"};
@@ -132,6 +118,13 @@ public class MainActivity extends AppCompatActivity
         if(output.equals("RECYCLABLE")) {recyclable();}
         trashOut = output;
         Log.e("values", "TRASH TYPE: " + trashOut);
+    }
+
+    public void checkCollisionTrash()
+    {
+        playerImage = new Rect(); trashImage = new Rect();
+        player.getHitRect(playerImage); trashBin.getHitRect(trashImage);
+        if(playerImage.intersect(trashImage)) {collisionTrash = true;} else {collisionTrash = false;}
     }
 
     public void trash()
@@ -161,6 +154,13 @@ public class MainActivity extends AppCompatActivity
         Log.e("values", "TRASH ELEMENT: " + strElement);
     }
 
+    public void checkCollisionRecyclable()
+    {
+        playerImage = new Rect(); recyclableImage = new Rect();
+        player.getHitRect(playerImage); recyclableBin.getHitRect(recyclableImage);
+        if(playerImage.intersect(recyclableImage)) {collisionRecyclable = true;} else {collisionRecyclable = false;}
+    }
+
     public void recyclable()
     {
         int brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle;
@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity
         Log.e("values", "RECYCLABLE ARRAY TO STRING: " + strArray);
         Log.e("values", "RECYCLABLE ELEMENT: " + strElement);
     }
+
     public static int getArrayIndex(int[] array, int values)
     {
         if (array == null) {return -1;}
@@ -201,28 +202,6 @@ public class MainActivity extends AppCompatActivity
         if(livesCount == 2) {lives.setImageDrawable(getDrawable(livesTwo));}
         if(livesCount == 1) {lives.setImageDrawable(getDrawable(livesOne));}
         if(livesCount == 0) {noLivesLeft();}
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void loseDialog()
-    {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(R.layout.custom_alert_dialog_lose);
-        Log.e("status", "LOSE");
-
-        builder.setPositiveButton("YES", (dialog, which) -> {startGame(); dialog.dismiss();});
-        builder.setNegativeButton("NO", (dialog, which) -> {returnHome(); addToDatabase(); dialog.dismiss();});
-
-        AlertDialog dialog = builder.create(); dialog.show();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE); Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-        LinearLayout.LayoutParams layoutParamsPositive = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-        LinearLayout.LayoutParams layoutParamsNegative = (LinearLayout.LayoutParams) btnNegative.getLayoutParams();
-        btnPositive.setBackground(getDrawable(R.drawable.alert_dialog_yes)); btnNegative.setBackground(getDrawable(R.drawable.alert_dialog_no));
-        btnNegative.setTextColor(Color.parseColor("#000000")); btnPositive.setTextColor(Color.parseColor("#000000"));
-        btnPositive.setTextSize(35); btnNegative.setTextSize(35);
-        layoutParamsPositive.weight = 10; layoutParamsNegative.weight = 10;
-        btnPositive.setLayoutParams(layoutParamsPositive); btnNegative.setLayoutParams(layoutParamsNegative);
     }
 
     @SuppressLint("SetTextI18n")
@@ -296,6 +275,28 @@ public class MainActivity extends AppCompatActivity
         recyclableName.setVisibility(View.INVISIBLE);
         lives.setImageDrawable(getDrawable(livesNull));
         loseDialog();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void loseDialog()
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.custom_alert_dialog_lose);
+        Log.e("status", "LOSE");
+
+        builder.setPositiveButton("YES", (dialog, which) -> {startGame(); dialog.dismiss();});
+        builder.setNegativeButton("NO", (dialog, which) -> {returnHome(); addToDatabase(); dialog.dismiss();});
+
+        AlertDialog dialog = builder.create(); dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE); Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        LinearLayout.LayoutParams layoutParamsPositive = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        LinearLayout.LayoutParams layoutParamsNegative = (LinearLayout.LayoutParams) btnNegative.getLayoutParams();
+        btnPositive.setBackground(getDrawable(R.drawable.alert_dialog_yes)); btnNegative.setBackground(getDrawable(R.drawable.alert_dialog_no));
+        btnNegative.setTextColor(Color.parseColor("#000000")); btnPositive.setTextColor(Color.parseColor("#000000"));
+        btnPositive.setTextSize(35); btnNegative.setTextSize(35);
+        layoutParamsPositive.weight = 10; layoutParamsNegative.weight = 10;
+        btnPositive.setLayoutParams(layoutParamsPositive); btnNegative.setLayoutParams(layoutParamsNegative);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -385,4 +386,5 @@ public class MainActivity extends AppCompatActivity
         intent.addCategory( Intent.CATEGORY_HOME ); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
 }
