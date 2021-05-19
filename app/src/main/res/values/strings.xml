@@ -16,7 +16,7 @@
     <string name="mineralbottle">The Holy Well Bottling Plant in the United Kingdom was the first bottling water plant in the world. It is widely believed that the selling of bottled water began in the plant in 1622.</string>
     <string name="lightbulb">Any lamps and light bulbs contain mercury, which is dangerous to the environment, especially water sources.</string>
     <string name="cheese">The latin word for ‘cheese’ is ‘caseus’ which means ‘to ferment and sour’.</string>
-
+    <string name="instructions">The user must identify the shown item which is “trash” or “recyclable” by dragging it to its rightful bin. The user will only have a three(3) health. If the user is correct, a trivia will appear across the screen and when the user put it in the wrong bin, user’s health will be deducted.</string>
 
 
 

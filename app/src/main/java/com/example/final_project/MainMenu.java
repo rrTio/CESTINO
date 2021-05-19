@@ -1,16 +1,23 @@
 package com.example.final_project;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainMenu extends AppCompatActivity
 {
-
     Button btnPlay, btnInstructions, btnLeaderboards, btnQuit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -48,4 +55,5 @@ public class MainMenu extends AppCompatActivity
         super.onDestroy();
         quitGame();
     }
+
 }
