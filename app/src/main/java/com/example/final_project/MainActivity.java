@@ -386,5 +386,4 @@ public class MainActivity extends AppCompatActivity
         intent.addCategory( Intent.CATEGORY_HOME ); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
 }
