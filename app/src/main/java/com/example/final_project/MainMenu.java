@@ -1,34 +1,30 @@
 package com.example.final_project;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainMenu extends AppCompatActivity
 {
     Button btnPlay, btnInstructions, btnLeaderboards, btnQuit;
+    MediaPlayer bgm, bgm1, click;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         setupButtons();
-
-        btnPlay.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {playGame();}});
-        btnInstructions.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {openInstructions();}});
-        btnLeaderboards.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {openLeaderboards();}});
-        btnQuit.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {quitGame();}});
+        click = MediaPlayer.create(this, R.raw.click);
+        bgm = MediaPlayer.create(this, R.raw.bgm);
+        bgm1 = MediaPlayer.create(this, R.raw.bgm1);
+        bgm.start();
+        btnPlay.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {playGame();click.start();bgm.pause(); bgm1.start();}});
+        btnInstructions.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {openInstructions();click.start();}});
+        btnLeaderboards.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {openLeaderboards();click.start();}});
+        btnQuit.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {quitGame();click.start();}});
     }
 
     public void setupButtons()
