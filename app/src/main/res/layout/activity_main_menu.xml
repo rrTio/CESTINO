@@ -28,7 +28,7 @@
             android:gravity="center"
             android:fontFamily="@font/goffik_outline"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="135dp"
     />
 
     <Button
@@ -37,7 +37,7 @@
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/lblTitle"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="130dp"
             android:layout_marginBottom="10dp"
             android:text="PLAY"
             android:textColor="#000000"

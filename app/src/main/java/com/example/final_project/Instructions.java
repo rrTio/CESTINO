@@ -14,11 +14,17 @@ import android.os.Bundle;
 
 public class Instructions extends AppCompatActivity
 {
+    String strInstructions;
+    TextView lblInstructions;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
+
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
+        strInstructions = getResources().getString(R.string.instructions);
+        lblInstructions = findViewById(R.id.lblInstructions);
+        lblInstructions.setText(strInstructions);
     }
 }
