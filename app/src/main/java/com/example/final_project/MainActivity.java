@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, yCoordinate = 250.0F;
     int score = 0, livesCount = 3, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree, screenWidth;
     String trashOut, playerName, strMilk, strBrownPaper, strCheese, strEggshell, strFishbone, strBanana, strApple, strMask, strBattery, strLightbulb, strNewspaper, strStyrofoam, strCan, strPaper, strPlastic, strMineralbottle;
+    MediaPlayer bgm, click, wrong, correct;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("ClickableViewAccessibility")
@@ -198,6 +200,7 @@ public class MainActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void wrongAnswer()
     {
+        wrong.start();
         livesCount--;
         if(livesCount == 2) {lives.setImageDrawable(getDrawable(livesTwo));}
         if(livesCount == 1) {lives.setImageDrawable(getDrawable(livesOne));}
@@ -208,6 +211,7 @@ public class MainActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startGame()
     {
+        bgm.start();
         trashType();
         score = 0;
         livesCount=3;
@@ -260,6 +264,10 @@ public class MainActivity extends AppCompatActivity
         displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = (displayMetrics.widthPixels/2) - 45;
+        click = MediaPlayer.create(this, R.raw.click);
+        bgm = MediaPlayer.create(this, R.raw.bgm1);
+        wrong = MediaPlayer.create(this, R.raw.wrong);
+        correct = MediaPlayer.create(this, R.raw.yehey);
     }
 
     public void returnHome() {Intent intent = new Intent(MainActivity.this, MainMenu.class); startActivity(intent);}
@@ -284,8 +292,8 @@ public class MainActivity extends AppCompatActivity
         builder.setView(R.layout.custom_alert_dialog_lose);
         Log.e("status", "LOSE");
 
-        builder.setPositiveButton("YES", (dialog, which) -> {startGame(); dialog.dismiss();});
-        builder.setNegativeButton("NO", (dialog, which) -> {returnHome(); addToDatabase(); dialog.dismiss();});
+        builder.setPositiveButton("YES", (dialog, which) -> {startGame(); dialog.dismiss(); click.start(); });
+        builder.setNegativeButton("NO", (dialog, which) -> {returnHome(); addToDatabase(); dialog.dismiss(); click.start();});
 
         AlertDialog dialog = builder.create(); dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -304,8 +312,9 @@ public class MainActivity extends AppCompatActivity
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.custom_alert_dialog_trivia);
-
-        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        bgm.pause();
+        correct.start();
+        builder.setPositiveButton("OK", (dialog, which) -> {dialog.dismiss(); click.start(); bgm.start(); correct.stop();});
 
         AlertDialog dialog = builder.create(); dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -337,11 +346,7 @@ public class MainActivity extends AppCompatActivity
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.custom_alert_dialog_trivia);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-        {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override public void onClick(DialogInterface dialog, int which) {dialog.dismiss();}
-        });
+        builder.setPositiveButton("OK", (dialog, which) -> {dialog.dismiss(); click.start(); bgm.start(); correct.stop();});
 
         AlertDialog dialog = builder.create(); dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -382,8 +387,6 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory( Intent.CATEGORY_HOME ); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        returnHome();
     }
 }

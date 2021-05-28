@@ -1,42 +1,36 @@
 package com.example.final_project;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainMenu extends AppCompatActivity
 {
     Button btnPlay, btnInstructions, btnLeaderboards, btnQuit;
+    MediaPlayer click;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        setupButtons();
+        setup();
 
-        btnPlay.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {playGame();}});
-        btnInstructions.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {openInstructions();}});
-        btnLeaderboards.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {openLeaderboards();}});
-        btnQuit.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {quitGame();}});
+        btnPlay.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {click.start(); playGame();}});
+        btnInstructions.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {click.start(); openInstructions(); }});
+        btnLeaderboards.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {click.start(); openLeaderboards();}});
+        btnQuit.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {click.start(); quitGame();}});
     }
 
-    public void setupButtons()
+    public void setup()
     {
         btnPlay = findViewById(R.id.btnPlay);
         btnInstructions = findViewById(R.id.btnInstructions);
         btnLeaderboards = findViewById(R.id.btnLeaderboards);
         btnQuit = findViewById(R.id.btnQuit);
+        click = MediaPlayer.create(this, R.raw.click);
     }
 
     public void playGame() {Intent intent = new Intent(this, MainActivity.class); startActivity(intent);}

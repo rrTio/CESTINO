@@ -1,6 +1,7 @@
 package com.example.final_project;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -17,13 +18,14 @@ public class Leaderboard extends AppCompatActivity
     Button btnReturn;
     ArrayAdapter arrayAdapter;
     DBHandler dbHandler;
-
+    MediaPlayer click;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboards);
         dbHandler = new DBHandler(this);
+        click = MediaPlayer.create(this, R.raw.click);
 
         btnReturn = findViewById(R.id.btnReturnToMenu);
         btnReturn.setOnClickListener(new View.OnClickListener()
@@ -34,6 +36,7 @@ public class Leaderboard extends AppCompatActivity
         {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                click.start();
                 try
                 {
                     DBOutput dbOutput = (DBOutput) parent.getItemAtPosition(position);
