@@ -7,12 +7,11 @@
         android:layout_height="match_parent"
         android:background="#808080"
         tools:context=".MainActivity">
-
     <TextView
             android:id="@+id/lblScore"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:text="SCORE: "
@@ -22,7 +21,6 @@
             android:fontFamily="@font/heyfun"
             android:visibility="invisible"
     />
-
     <ImageView
             android:id="@+id/lives"
             android:layout_width="150dp"
@@ -32,7 +30,6 @@
             android:src="@drawable/life_three"
             android:visibility="invisible"
     />
-
     <Button
             android:id="@+id/StartGame"
             android:layout_width="250dp"
@@ -45,7 +42,6 @@
             android:fontFamily="@font/heyfun"
             android:textStyle="bold"
     />
-
     <EditText
             android:id="@+id/txtName"
             android:layout_width="250dp"
@@ -63,13 +59,23 @@
     />
 
     <TextView
+
+
+
+
+
+
+
+
+
+
             android:id="@+id/trashName"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="50dp"
-            android:layout_marginLeft="23dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:text="TRASH"
             android:textColor="#000000"
             android:textSize="30dp"
@@ -77,54 +83,49 @@
             android:fontFamily="@font/heyfun"
             android:visibility="invisible"
     />
-
     <TextView
             android:id="@+id/recyclableName"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginRight="20dp"
             android:text="RECYCLABLE"
             android:textColor="#000000"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:gravity="center"
             android:fontFamily="@font/heyfun"
             android:visibility="invisible"
     />
-
     <ImageView
             android:id="@+id/trash"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/lives"
-            android:layout_marginTop="50dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="150dp"
             android:visibility="invisible"
     />
-
     <ImageView
             android:id="@+id/binTrash"
-            android:layout_width="190dp"
-            android:layout_height="250dp"
-            android:layout_below="@+id/trash"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="220dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="60dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/bin_trash"
             android:visibility="invisible"
     />
-
     <ImageView
             android:id="@+id/binRecyclable"
-            android:layout_width="190dp"
-            android:layout_height="250dp"
-            android:layout_below="@+id/trash"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="220dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginBottom="60dp"
+            android:layout_marginRight="20dp"
             android:src="@drawable/bin_recyclable"
             android:visibility="invisible"
     />
-
 </RelativeLayout>

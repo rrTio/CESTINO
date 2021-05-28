@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity
     TextView lblScore, trashName, recyclableName, lblTrivia;
     boolean collisionTrash = false, collisionRecyclable = false;
     ImageView player, trashBin, recyclableBin, lives, trash, imageGarbage;
-    float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY, yCoordinate = 250.0F;
-    int score = 0, livesCount = 3, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree, screenWidth;
+    float xDown = 0,yDown = 0, movedX, movedY, distanceX, distanceY;
+    int score = 0, livesCount = 3, trashIndex, recyclableIndex, livesNull, livesOne, livesTwo, livesThree, screenWidth, screenHeigth;
     String trashOut, playerName, strMilk, strBrownPaper, strCheese, strEggshell, strFishbone, strBanana, strApple, strMask, strBattery, strLightbulb, strNewspaper, strStyrofoam, strCan, strPaper, strPlastic, strMineralbottle;
     MediaPlayer bgm, click, wrong, correct;
 
@@ -81,11 +81,12 @@ public class MainActivity extends AppCompatActivity
                             {
                                 score++;
                                 lblScore.setText("Score: " + score);
+                                runAudio();
                                 trashTrivia();
                                 Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
                             }
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
-                            trash.setImageDrawable(null); trashType(); trash.setX(screenWidth); trash.setY(yCoordinate);
+                            trash.setImageDrawable(null); trashType(); trash.setX(screenWidth); trash.setY(screenHeigth);
                         }
 
                         //FOR RECYCLABLE
@@ -95,15 +96,16 @@ public class MainActivity extends AppCompatActivity
                             if (trashOut == "RECYCLABLE")
                             {
                                 score++;
-                                recyclableTrivia();
                                 lblScore.setText("Score: " + score);
+                                runAudio();
+                                recyclableTrivia();
                                 Toast.makeText(MainActivity.this, "CORRECT", Toast.LENGTH_SHORT).show();
                             }
                             else{wrongAnswer(); Toast.makeText(MainActivity.this, "WRONG", Toast.LENGTH_SHORT).show();}
-                            trash.setImageDrawable(null); trashType(); trash.setX(screenWidth); trash.setY(yCoordinate);
+                            trash.setImageDrawable(null); trashType(); trash.setX(screenWidth); trash.setY(screenHeigth);
                         }
 
-                        if(!collisionTrash || !collisionRecyclable) {trash.setX(screenWidth); trash.setY(yCoordinate);}
+                        if(!collisionTrash || !collisionRecyclable) {trash.setX(screenWidth); trash.setY(screenHeigth);}
                         break;
                 }
                 return true;
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity
         trash = findViewById(R.id.trash); int[] arrayTrash = {cheese, eggshell, fishBone, banana, apple, mask, battery, lightBulb};
         int randomize = new Random().nextInt(arrayTrash.length);
         draw = getResources().getDrawable(arrayTrash[randomize]);
-        trash.setX(screenWidth); trash.setY(yCoordinate);
+        trash.setX(screenWidth); trash.setY(screenHeigth);
         trash.setImageDrawable(draw);
 
         trashIndex = getArrayIndex(arrayTrash, arrayTrash[randomize]);
@@ -179,7 +181,7 @@ public class MainActivity extends AppCompatActivity
         trash = findViewById(R.id.trash); int[] arrayRecyclable = {brownPaper, milk, newspaper, styrofoam, can, trashPaper, plastic, mineralBottle};
         int randomize = new Random().nextInt(arrayRecyclable.length);
         draw = getResources().getDrawable(arrayRecyclable[randomize]);
-        trash.setX(screenWidth); trash.setY(yCoordinate);
+        trash.setX(screenWidth); trash.setY(screenHeigth);
         trash.setImageDrawable(draw);
 
         recyclableIndex = getArrayIndex(arrayRecyclable, arrayRecyclable[randomize]);
@@ -263,7 +265,8 @@ public class MainActivity extends AppCompatActivity
         lblScore.setText("Score: " + score);
         displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        screenWidth = (displayMetrics.widthPixels/2) - 45;
+        screenWidth = (displayMetrics.widthPixels/2) - 150;
+        screenHeigth = (displayMetrics.heightPixels/2) - 300;
         click = MediaPlayer.create(this, R.raw.click);
         bgm = MediaPlayer.create(this, R.raw.bgm1);
         wrong = MediaPlayer.create(this, R.raw.wrong);
@@ -291,9 +294,9 @@ public class MainActivity extends AppCompatActivity
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.custom_alert_dialog_lose);
         Log.e("status", "LOSE");
-
-        builder.setPositiveButton("YES", (dialog, which) -> {startGame(); dialog.dismiss(); click.start(); });
-        builder.setNegativeButton("NO", (dialog, which) -> {returnHome(); addToDatabase(); dialog.dismiss(); click.start();});
+        wrong.start();
+        builder.setPositiveButton("YES", (dialog, which) -> {startGame(); dialog.dismiss(); click.start(); dialog.cancel();});
+        builder.setNegativeButton("NO", (dialog, which) -> {returnHome(); addToDatabase(); dialog.dismiss(); click.start(); dialog.cancel();});
 
         AlertDialog dialog = builder.create(); dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -307,14 +310,18 @@ public class MainActivity extends AppCompatActivity
         btnPositive.setLayoutParams(layoutParamsPositive); btnNegative.setLayoutParams(layoutParamsNegative);
     }
 
+    public void runAudio()
+    {
+        bgm.pause();
+        correct.start();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void trashTrivia()
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.custom_alert_dialog_trivia);
-        bgm.pause();
-        correct.start();
-        builder.setPositiveButton("OK", (dialog, which) -> {dialog.dismiss(); click.start(); bgm.start(); correct.stop();});
+        builder.setPositiveButton("OK", (dialog, which) -> {dialog.dismiss(); click.start(); bgm.start(); correct.stop(); dialog.cancel();});
 
         AlertDialog dialog = builder.create(); dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -345,8 +352,7 @@ public class MainActivity extends AppCompatActivity
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.custom_alert_dialog_trivia);
-
-        builder.setPositiveButton("OK", (dialog, which) -> {dialog.dismiss(); click.start(); bgm.start(); correct.stop();});
+        builder.setPositiveButton("OK", (dialog, which) -> {dialog.dismiss(); click.start(); bgm.start(); correct.stop(); dialog.cancel();});
 
         AlertDialog dialog = builder.create(); dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -387,6 +393,7 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
+        bgm.stop();
         returnHome();
     }
 }

@@ -3,22 +3,15 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-<<<<<<< HEAD
               android:background="@drawable/instructions_background">
-=======
-              android:background="@drawable/alert_dialog_background">
->>>>>>> 7e8125a92aaec52335f2cfd9288ab18707836d61
 
     <TextView
             android:id="@+id/titleLose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-<<<<<<< HEAD
             android:layout_margin="20dp"
-=======
             android:layout_marginTop="280dp"
->>>>>>> 7e8125a92aaec52335f2cfd9288ab18707836d61
             android:text="HOW TO PLAY"
             android:textColor="#000000"
             android:textSize="55dp"

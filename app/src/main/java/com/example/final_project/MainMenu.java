@@ -49,5 +49,4 @@ public class MainMenu extends AppCompatActivity
         super.onDestroy();
         quitGame();
     }
-
 }

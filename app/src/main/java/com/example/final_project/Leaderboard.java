@@ -29,7 +29,7 @@ public class Leaderboard extends AppCompatActivity
 
         btnReturn = findViewById(R.id.btnReturnToMenu);
         btnReturn.setOnClickListener(new View.OnClickListener()
-        {@Override public void onClick(View v) { startActivity(new Intent(Leaderboard.this, MainMenu.class));}});
+        {@Override public void onClick(View v) { click.start(); startActivity(new Intent(Leaderboard.this, MainMenu.class));}});
 
         listView = findViewById(R.id.listScores);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
